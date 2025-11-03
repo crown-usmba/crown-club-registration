@@ -75,105 +75,6 @@ const translations = {
     }
 };
 
-// دالة لإرسال البيانات إلى البريد الإلكتروني
-async function sendRegistrationEmail(formData) {
-    const emailData = {
-        to: 'crown.club.usmba@gmail.com',
-        subject: `تسجيل جديد في نادي CROWN - ${formData.firstName} ${formData.lastName}`,
-        message: `
-            تم استلام تسجيل جديد في نادي CROWN
-        
-            المعلومات الشخصية:
-            الاسم: ${formData.firstName} ${formData.lastName}
-            رقم CIN: ${formData.cin}
-            رقم مسار: ${formData.massar}
-            البريد الإلكتروني: ${formData.email}
-            رقم الهاتف: ${formData.phone}
-            التخصص: ${formData.major}
-            سنة الدراسة: ${formData.year}
-            
-            الاهتمامات:
-            ${formData.interests.join(', ')}
-            ${formData.sport ? `الرياضة المفضلة: ${formData.sport}` : ''}
-            
-            ما يثير الاهتمام في النادي:
-            ${formData.interest}
-            
-            الخبرة السابقة:
-            ${formData.experience || 'لا توجد'}
-            
-            معلومات إضافية:
-            ${formData.additionalInfo || 'لا توجد'}
-            
-            أوقات التوفر:
-            ${formData.availability.join(', ')}
-            
-            سمع عن النادي من خلال: ${formData.hearAbout}
-            
-            التحديثات:
-            ${formData.mailingList ? 'يرغب في تلقي تحديثات البريد الإلكتروني' : 'لا يرغب في تحديثات البريد الإلكتروني'}
-            ${formData.whatsappUpdates ? 'يرغب في تلقي تحديثات الواتساب' : 'لا يرغب في تحديثات الواتساب'}
-            
-            تم التسجيل في: ${new Date().toLocaleString('ar-EG')}
-        `
-    };
-
-    try {
-        // استخدام EmailJS لإرسال البريد الإلكتروني
-        // تحتاج إلى إعداد حساب في EmailJS واستبدال هذه المعطيات بمعلوماتك
-        if (typeof emailjs !== 'undefined') {
-            await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
-                to_email: emailData.to,
-                subject: emailData.subject,
-                message: emailData.message
-            });
-            return true;
-        } else {
-            // بديل: استخدام Formspree أو خدمة أخرى
-            const response = await fetch('https://formspree.io/f/xjvnzzzw', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(emailData)
-            });
-            
-            return response.ok;
-        }
-    } catch (error) {
-        console.error('Error sending email:', error);
-        return false;
-    }
-}
-
-// بديل أبسط باستخدام Formspree مباشرة
-function submitToFormspree(formData) {
-    const form = document.getElementById('registrationForm');
-    form.action = 'https://formspree.io/f/xjvnzzzw';
-    form.method = 'POST';
-    
-    // إضافة حقول مخفية للبيانات
-    Object.keys(formData).forEach(key => {
-        if (Array.isArray(formData[key])) {
-            formData[key].forEach(value => {
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = `${key}[]`;
-                input.value = value;
-                form.appendChild(input);
-            });
-        } else if (formData[key]) {
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = key;
-            input.value = formData[key];
-            form.appendChild(input);
-        }
-    });
-    
-    return true;
-}
-
 document.addEventListener('DOMContentLoaded', function() {
     // تبديل اللغة
     const langButtons = document.querySelectorAll('.lang-btn');
@@ -224,8 +125,6 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
         
         if (validateForm()) {
-            const formData = collectFormData();
-            
             // عرض رسالة تحميل
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
@@ -233,22 +132,35 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.disabled = true;
             
             try {
-                // محاولة الإرسال باستخدام Formspree (البديل الأبسط)
-                const success = submitToFormspree(formData);
+                // إرسال النموذج إلى Formspree
+                const formData = new FormData(this);
                 
-                if (success) {
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
                     // النموذج صالح، عرض رسالة النجاح
                     document.getElementById('successTitle').textContent = translations[currentLang]['success-title'];
                     document.getElementById('successMessage').textContent = translations[currentLang]['success-message'];
                     document.getElementById('successModal').style.display = 'flex';
+                    
+                    // إعادة تعيين النموذج
+                    this.reset();
+                    if (sportOptions) {
+                        sportOptions.style.display = 'none';
+                    }
                 } else {
-                    throw new Error('Failed to submit form');
+                    throw new Error('Form submission failed');
                 }
             } catch (error) {
-                // في حالة الخطأ، استخدام الطريقة البديلة
-                console.log('Using alternative submission method');
-                document.getElementById('successTitle').textContent = translations[currentLang]['success-title'];
-                document.getElementById('successMessage').textContent = translations[currentLang]['success-message'];
+                // في حالة الخطأ، عرض رسالة خطأ
+                document.getElementById('successTitle').textContent = translations[currentLang]['error-title'];
+                document.getElementById('successMessage').textContent = translations[currentLang]['error-message'];
                 document.getElementById('successModal').style.display = 'flex';
             } finally {
                 // استعادة حالة الزر
@@ -261,36 +173,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // إغلاق نافذة النجاح
     document.getElementById('closeSuccess').addEventListener('click', function() {
         document.getElementById('successModal').style.display = 'none';
-        document.getElementById('registrationForm').reset();
-        if (sportOptions) {
-            sportOptions.style.display = 'none';
-        }
     });
-    
-    function collectFormData() {
-        const form = document.getElementById('registrationForm');
-        const formData = new FormData(form);
-        
-        return {
-            firstName: formData.get('firstName'),
-            lastName: formData.get('lastName'),
-            cin: formData.get('cin'),
-            massar: formData.get('massar'),
-            email: formData.get('email'),
-            phone: formData.get('phone'),
-            major: formData.get('major'),
-            year: formData.get('year'),
-            interests: Array.from(formData.getAll('interests')),
-            sport: formData.get('sport'),
-            interest: formData.get('interest'),
-            experience: formData.get('experience'),
-            additionalInfo: formData.get('additional-info'),
-            availability: Array.from(formData.getAll('availability')),
-            hearAbout: formData.get('hear-about'),
-            mailingList: formData.get('mailing-list') === 'on',
-            whatsappUpdates: formData.get('whatsapp-updates') === 'on'
-        };
-    }
     
     function validateForm() {
         let isValid = true;
