@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CROWN Club - نموذج التسجيل</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -18,19 +18,9 @@
       <i class="fas fa-crown"></i>
       <i class="fas fa-crown"></i>
     </div>
-    <div class="floating-stars">
-      <div class="star"></div>
-      <div class="star"></div>
-      <div class="star"></div>
-      <div class="star"></div>
-      <div class="star"></div>
-      <div class="star"></div>
-      <div class="star"></div>
-      <div class="star"></div>
-    </div>
   </div>
 
-  <!-- Navigation Progress -->
+  <!-- Form Progress -->
   <div class="form-progress">
     <div class="progress-bar">
       <div class="progress-fill" id="progressFill"></div>
@@ -38,39 +28,31 @@
     <div class="progress-steps">
       <div class="step active" data-step="1">
         <div class="step-icon">1</div>
-        <span data-translate="personal-info">المعلومات الشخصية</span>
+        <span>المعلومات الشخصية</span>
       </div>
       <div class="step" data-step="2">
         <div class="step-icon">2</div>
-        <span data-translate="interests">اهتمامات النادي</span>
+        <span>اهتمامات النادي</span>
       </div>
       <div class="step" data-step="3">
         <div class="step-icon">3</div>
-        <span data-translate="additional-info">معلومات إضافية</span>
+        <span>معلومات إضافية</span>
       </div>
     </div>
   </div>
 
   <div class="container">
     <div class="header">
-      <!-- Animated Logo -->
       <div class="logo-container">
         <div class="animated-logo">
-          <div class="crown-base"></div>
-          <div class="crown-point crown-point-1"></div>
-          <div class="crown-point crown-point-2"></div>
-          <div class="crown-point crown-point-3"></div>
-          <div class="crown-point crown-point-4"></div>
-          <div class="crown-point crown-point-5"></div>
-          <div class="crown-jewel"></div>
+          <i class="fas fa-crown"></i>
         </div>
       </div>
 
       <div class="header-content">
-        <h1 data-translate="club-name">نادي <span class="highlight">CROWN</span></h1>
-        <p data-translate="club-description">للأنشطة الاقتصادية والاجتماعية والإنسانية والرياضية</p>
+        <h1>نادي <span class="highlight">CROWN</span></h1>
+        <p>للأنشطة الاقتصادية والاجتماعية والإنسانية والرياضية</p>
         
-        <!-- Stats Counter -->
         <div class="stats">
           <div class="stat-item">
             <div class="stat-number" id="membersCount">150+</div>
@@ -88,8 +70,7 @@
 
         <a href="https://www.instagram.com/crown.club.usmba" target="_blank" class="instagram-link">
           <i class="fab fa-instagram"></i> 
-          <span data-translate="follow-us">تابعنا على الإنستغرام</span>
-          <div class="link-arrow">→</div>
+          <span>تابعنا على الإنستغرام</span>
         </a>
       </div>
     </div>
@@ -99,7 +80,7 @@
         <!-- Step 1: المعلومات الشخصية -->
         <div class="form-step active" id="step1">
           <div class="step-header">
-            <h2 data-translate="personal-info">المعلومات الشخصية</h2>
+            <h2>المعلومات الشخصية</h2>
             <p>املأ معلوماتك الأساسية للانضمام إلى عائلة CROWN</p>
           </div>
 
@@ -107,7 +88,7 @@
             <div class="form-group">
               <div class="input-container">
                 <input type="text" id="firstName" name="firstName" required>
-                <label for="firstName" data-translate="first-name">الاسم الأول</label>
+                <label for="firstName">الاسم الأول</label>
                 <div class="input-icon">
                   <i class="fas fa-user"></i>
                 </div>
@@ -118,7 +99,7 @@
             <div class="form-group">
               <div class="input-container">
                 <input type="text" id="lastName" name="lastName" required>
-                <label for="lastName" data-translate="last-name">الاسم الأخير</label>
+                <label for="lastName">الاسم الأخير</label>
                 <div class="input-icon">
                   <i class="fas fa-user"></i>
                 </div>
@@ -129,7 +110,7 @@
             <div class="form-group">
               <div class="input-container">
                 <input type="text" id="cin" name="cin" required>
-                <label for="cin" data-translate="cin">رقم بطاقة التعريف الوطنية (CIN)</label>
+                <label for="cin">رقم بطاقة التعريف الوطنية (CIN)</label>
                 <div class="input-icon">
                   <i class="fas fa-id-card"></i>
                 </div>
@@ -140,7 +121,7 @@
             <div class="form-group">
               <div class="input-container">
                 <input type="text" id="massar" name="massar" required>
-                <label for="massar" data-translate="massar">رقم مسار</label>
+                <label for="massar">رقم مسار</label>
                 <div class="input-icon">
                   <i class="fas fa-barcode"></i>
                 </div>
@@ -151,7 +132,7 @@
             <div class="form-group">
               <div class="input-container">
                 <input type="email" id="email" name="email" required>
-                <label for="email" data-translate="email">البريد الإلكتروني الجامعي</label>
+                <label for="email">البريد الإلكتروني الجامعي</label>
                 <div class="input-icon">
                   <i class="fas fa-envelope"></i>
                 </div>
@@ -162,7 +143,7 @@
             <div class="form-group">
               <div class="input-container">
                 <input type="tel" id="phone" name="phone" required>
-                <label for="phone" data-translate="phone">رقم الهاتف</label>
+                <label for="phone">رقم الهاتف</label>
                 <div class="input-icon">
                   <i class="fas fa-phone"></i>
                 </div>
@@ -173,7 +154,7 @@
             <div class="form-group">
               <div class="input-container">
                 <input type="text" id="major" name="major" required>
-                <label for="major" data-translate="major">التخصص</label>
+                <label for="major">التخصص</label>
                 <div class="input-icon">
                   <i class="fas fa-graduation-cap"></i>
                 </div>
@@ -184,12 +165,12 @@
             <div class="form-group">
               <div class="select-container">
                 <select id="year" name="year" required>
-                  <option value="" data-translate="select-year">اختر السنة</option>
-                  <option value="first-year" data-translate="first-year">سنة أولى</option>
-                  <option value="second-year" data-translate="second-year">سنة ثانية</option>
-                  <option value="third-year" data-translate="third-year">سنة ثالثة</option>
-                  <option value="fourth-year" data-translate="fourth-year">سنة رابعة</option>
-                  <option value="graduate" data-translate="graduate">دراسات عليا</option>
+                  <option value="">اختر السنة</option>
+                  <option value="first-year">سنة أولى</option>
+                  <option value="second-year">سنة ثانية</option>
+                  <option value="third-year">سنة ثالثة</option>
+                  <option value="fourth-year">سنة رابعة</option>
+                  <option value="graduate">دراسات عليا</option>
                 </select>
                 <div class="select-icon">
                   <i class="fas fa-chevron-down"></i>
@@ -210,7 +191,7 @@
         <!-- Step 2: اهتمامات النادي -->
         <div class="form-step" id="step2">
           <div class="step-header">
-            <h2 data-translate="interests">اهتمامات النادي</h2>
+            <h2>اهتمامات النادي</h2>
             <p>اختر المجالات التي تثير اهتمامك وتناسب مهاراتك</p>
           </div>
 
@@ -219,7 +200,7 @@
               <div class="interest-icon">
                 <i class="fas fa-chart-line"></i>
               </div>
-              <h3 data-translate="economic-activities">الأنشطة الاقتصادية</h3>
+              <h3>الأنشطة الاقتصادية</h3>
               <p>ورشات العمل، المؤتمرات، والمشاريع الاقتصادية</p>
               <input type="checkbox" name="interests" value="economic" hidden>
             </div>
@@ -228,7 +209,7 @@
               <div class="interest-icon">
                 <i class="fas fa-users"></i>
               </div>
-              <h3 data-translate="social-activities">الأنشطة الاجتماعية</h3>
+              <h3>الأنشطة الاجتماعية</h3>
               <p>الفعاليات الاجتماعية والتطوعية والتبادل الثقافي</p>
               <input type="checkbox" name="interests" value="social" hidden>
             </div>
@@ -237,7 +218,7 @@
               <div class="interest-icon">
                 <i class="fas fa-hands-helping"></i>
               </div>
-              <h3 data-translate="human-activities">الأنشطة الإنسانية</h3>
+              <h3>الأنشطة الإنسانية</h3>
               <p>المبادرات الخيرية وحملات التبرع والتطوع</p>
               <input type="checkbox" name="interests" value="human" hidden>
             </div>
@@ -246,7 +227,7 @@
               <div class="interest-icon">
                 <i class="fas fa-running"></i>
               </div>
-              <h3 data-translate="sport-activities">الأنشطة الرياضية</h3>
+              <h3>الأنشطة الرياضية</h3>
               <p>البطولات والأنشطة الرياضية واللياقة البدنية</p>
               <input type="checkbox" name="interests" value="sport" hidden>
             </div>
@@ -254,22 +235,22 @@
 
           <div class="error-message" id="activitiesError"></div>
 
-          <!-- Sport Options (appears when sport is selected) -->
-          <div class="sport-options" id="sportOptions" style="display: none;">
-            <h3 data-translate="sport-options-title">اختر الرياضة التي تفضل</h3>
+          <!-- Sport Options -->
+          <div class="sport-options" id="sportOptions">
+            <h3>اختر الرياضة التي تفضل</h3>
             <div class="sport-buttons">
               <label class="sport-btn">
                 <input type="radio" name="sport" value="volleyball" hidden>
                 <div class="sport-content">
                   <i class="fas fa-volleyball-ball"></i>
-                  <span data-translate="volleyball">الكرة الطائرة</span>
+                  <span>الكرة الطائرة</span>
                 </div>
               </label>
               <label class="sport-btn">
                 <input type="radio" name="sport" value="basketball" hidden>
                 <div class="sport-content">
                   <i class="fas fa-basketball-ball"></i>
-                  <span data-translate="basketball">كرة السلة</span>
+                  <span>كرة السلة</span>
                 </div>
               </label>
             </div>
@@ -278,16 +259,14 @@
 
           <div class="form-group">
             <div class="textarea-container">
-              <textarea id="interest" name="interest" rows="3" required></textarea>
-              <label for="interest" data-translate="interest">ما الذي يثير اهتمامك في نادينا؟</label>
+              <textarea id="interest" name="interest" rows="3" required placeholder="أخبرنا بما يثير اهتمامك في نادينا..."></textarea>
             </div>
             <div class="error-message" id="interestError"></div>
           </div>
 
           <div class="form-group">
             <div class="textarea-container">
-              <textarea id="experience" name="experience" rows="3"></textarea>
-              <label for="experience" data-translate="experience">الخبرة السابقة (إن وجدت)</label>
+              <textarea id="experience" name="experience" rows="3" placeholder="شاركنا بخبرتك السابقة إن وجدت..."></textarea>
             </div>
           </div>
 
@@ -306,39 +285,39 @@
         <!-- Step 3: معلومات إضافية -->
         <div class="form-step" id="step3">
           <div class="step-header">
-            <h2 data-translate="additional-info">معلومات إضافية</h2>
+            <h2>معلومات إضافية</h2>
             <p>أخبرنا المزيد عن توافرك وتفضيلاتك</p>
           </div>
 
           <div class="availability-section">
-            <h3 data-translate="availability">متى تكون متاحاً عادةً للاجتماعات؟</h3>
+            <h3>متى تكون متاحاً عادةً للاجتماعات؟</h3>
             <div class="availability-grid">
               <label class="availability-card">
                 <input type="checkbox" name="availability" value="weekday-mornings" hidden>
                 <div class="availability-content">
                   <i class="fas fa-sun"></i>
-                  <span data-translate="weekday-mornings">صباح أيام الأسبوع</span>
+                  <span>صباح أيام الأسبوع</span>
                 </div>
               </label>
               <label class="availability-card">
                 <input type="checkbox" name="availability" value="weekday-afternoons" hidden>
                 <div class="availability-content">
                   <i class="fas fa-cloud-sun"></i>
-                  <span data-translate="weekday-afternoons">بعد ظهر أيام الأسبوع</span>
+                  <span>بعد ظهر أيام الأسبوع</span>
                 </div>
               </label>
               <label class="availability-card">
                 <input type="checkbox" name="availability" value="weekday-evenings" hidden>
                 <div class="availability-content">
                   <i class="fas fa-moon"></i>
-                  <span data-translate="weekday-evenings">مساء أيام الأسبوع</span>
+                  <span>مساء أيام الأسبوع</span>
                 </div>
               </label>
               <label class="availability-card">
                 <input type="checkbox" name="availability" value="weekends" hidden>
                 <div class="availability-content">
                   <i class="fas fa-calendar-weekend"></i>
-                  <span data-translate="weekends">عطلات نهاية الأسبوع</span>
+                  <span>عطلات نهاية الأسبوع</span>
                 </div>
               </label>
             </div>
@@ -348,14 +327,14 @@
           <div class="form-group">
             <div class="select-container">
               <select id="hear-about" name="hear-about" required>
-                <option value="" data-translate="select-option">اختر خياراً</option>
-                <option value="friend" data-translate="friend">صديق</option>
-                <option value="professor" data-translate="professor">أستاذ</option>
-                <option value="social-media" data-translate="social-media">وسائل التواصل الاجتماعي</option>
-                <option value="poster" data-translate="poster">ملصق/نشرة</option>
-                <option value="university-website" data-translate="university-website">موقع الجامعة</option>
-                <option value="club-fair" data-translate="club-fair">معرض الأندية</option>
-                <option value="other" data-translate="other">آخر</option>
+                <option value="">اختر خياراً</option>
+                <option value="friend">صديق</option>
+                <option value="professor">أستاذ</option>
+                <option value="social-media">وسائل التواصل الاجتماعي</option>
+                <option value="poster">ملصق/نشرة</option>
+                <option value="university-website">موقع الجامعة</option>
+                <option value="club-fair">معرض الأندية</option>
+                <option value="other">آخر</option>
               </select>
               <div class="select-icon">
                 <i class="fas fa-chevron-down"></i>
@@ -372,7 +351,7 @@
                     <i class="fas fa-envelope"></i>
                   </div>
                   <div class="preference-text">
-                    <h4 data-translate="mailing-list">أرغب في تلقي تحديثات النادي عبر البريد الإلكتروني</h4>
+                    <h4>أرغب في تلقي تحديثات النادي عبر البريد الإلكتروني</h4>
                     <p>ابق على اطلاع بآخر الأخبار والفعاليات</p>
                   </div>
                   <div class="preference-toggle"></div>
@@ -388,7 +367,7 @@
                     <i class="fab fa-whatsapp"></i>
                   </div>
                   <div class="preference-text">
-                    <h4 data-translate="whatsapp-updates">أرغب في تلقي تحديثات النادي عبر واتساب</h4>
+                    <h4>أرغب في تلقي تحديثات النادي عبر واتساب</h4>
                     <p>احصل على إشعارات فورية عن أنشطة النادي</p>
                   </div>
                   <div class="preference-toggle"></div>
@@ -405,7 +384,7 @@
                   <i class="fas fa-check"></i>
                 </div>
                 <div class="agreement-text">
-                  <h4 data-translate="agree">أوافق على شروط وأحكام النادي</h4>
+                  <h4>أوافق على شروط وأحكام النادي</h4>
                   <p>قرأت واستوعبت جميع الشروط والأحكام المطبقة</p>
                 </div>
               </div>
@@ -419,7 +398,7 @@
               <span>السابق</span>
             </button>
             <button type="submit" class="btn btn-submit">
-              <span data-translate="submit">إكمال التسجيل</span>
+              <span>إكمال التسجيل</span>
               <i class="fas fa-crown"></i>
             </button>
           </div>
@@ -432,48 +411,27 @@
   <div class="language-switcher">
     <button class="lang-btn active" data-lang="ar">
       <span>العربية</span>
-      <i class="fas fa-globe"></i>
     </button>
-    <div class="lang-dropdown">
-      <button class="lang-btn" data-lang="fr">
-        <span>Français</span>
-      </button>
-      <button class="lang-btn" data-lang="en">
-        <span>English</span>
-      </button>
-    </div>
+    <button class="lang-btn" data-lang="fr">
+      <span>Français</span>
+    </button>
+    <button class="lang-btn" data-lang="en">
+      <span>English</span>
+    </button>
   </div>
 
   <!-- Success Modal -->
   <div class="success-modal" id="successModal">
-    <div class="success-backdrop"></div>
     <div class="success-content">
       <div class="success-animation">
         <div class="success-checkmark">
-          <div class="check-icon">
-            <div class="icon-line line-tip"></div>
-            <div class="icon-line line-long"></div>
-            <div class="icon-circle"></div>
-            <div class="icon-fix"></div>
-          </div>
-        </div>
-        <div class="confetti">
-          <div class="confetti-piece"></div>
-          <div class="confetti-piece"></div>
-          <div class="confetti-piece"></div>
-          <div class="confetti-piece"></div>
-          <div class="confetti-piece"></div>
-          <div class="confetti-piece"></div>
-          <div class="confetti-piece"></div>
-          <div class="confetti-piece"></div>
-          <div class="confetti-piece"></div>
+          <i class="fas fa-check"></i>
         </div>
       </div>
-      <h2 id="successTitle" data-translate="success-title">مرحباً في عائلة CROWN!</h2>
-      <p id="successMessage" data-translate="success-message">تم استلام طلبك بنجاح وسنتواصل معك قريباً للترحيب بك رسمياً في النادي</p>
+      <h2 id="successTitle">مرحباً في عائلة CROWN!</h2>
+      <p id="successMessage">تم استلام طلبك بنجاح وسنتواصل معك قريباً للترحيب بك رسمياً في النادي</p>
       <button class="btn btn-success" id="closeSuccess">
         <span>ممتاز!</span>
-        <i class="fas fa-sparkles"></i>
       </button>
     </div>
   </div>
