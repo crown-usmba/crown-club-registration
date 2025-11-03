@@ -2,44 +2,42 @@
 let currentStep = 1;
 const totalSteps = 3;
 
+// Initialize the form when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     initializeForm();
-    setupScrollHandling();
-    setupLanguageSwitcher();
+    setupEventListeners();
 });
 
 function initializeForm() {
-    setupStepNavigation();
-    setupInteractiveElements();
-    updateProgressBar();
-    
-    // Hide sport options initially
-    document.getElementById('sportOptions').style.display = 'none';
-    
     // Show first step
     showStep(currentStep);
+    updateProgressBar();
+    
+    // Set up form validation and navigation
+    setupFormNavigation();
+    setupInteractiveElements();
 }
 
-function setupScrollHandling() {
-    window.addEventListener('scroll', function() {
-        const progressBar = document.querySelector('.enhanced-progress');
-        if (progressBar) {
-            if (window.scrollY > 50) {
-                progressBar.style.background = 'rgba(26, 26, 26, 0.98)';
-            } else {
-                progressBar.style.background = 'rgba(26, 26, 26, 0.95)';
-            }
-        }
+function setupEventListeners() {
+    // Language switcher
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const lang = this.getAttribute('data-lang');
+            switchLanguage(lang);
+        });
     });
+
+    // Modal close
+    document.getElementById('closeModal').addEventListener('click', closeModal);
 }
 
-function setupStepNavigation() {
+function setupFormNavigation() {
     // Next buttons
     document.querySelectorAll('.btn-next').forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
             const nextStep = parseInt(this.getAttribute('data-next'));
-            goToNextStep(nextStep);
+            navigateToStep(nextStep);
         });
     });
 
@@ -48,43 +46,150 @@ function setupStepNavigation() {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
             const prevStep = parseInt(this.getAttribute('data-prev'));
-            goToPrevStep(prevStep);
+            navigateToStep(prevStep);
         });
     });
 
     // Form submission
-    const form = document.getElementById('registrationForm');
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            handleFormSubmit();
-        });
-    }
+    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        submitForm();
+    });
 }
 
-function goToNextStep(nextStep) {
-    if (validateCurrentStep()) {
-        currentStep = nextStep;
-        showStep(currentStep);
-        updateProgressBar();
+function setupInteractiveElements() {
+    // Interest cards
+    document.querySelectorAll('.interest-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const checkbox = this.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
+            
+            if (checkbox.checked) {
+                this.classList.add('selected');
+            } else {
+                this.classList.remove('selected');
+            }
+
+            // Show/hide sport options based on sport interest
+            if (checkbox.value === 'sport') {
+                const sportSection = document.getElementById('sportSection');
+                sportSection.style.display = checkbox.checked ? 'block' : 'none';
+                
+                // Clear sport selection when hiding
+                if (!checkbox.checked) {
+                    document.querySelectorAll('input[name="sport"]').forEach(radio => {
+                        radio.checked = false;
+                    });
+                    document.querySelectorAll('.sport-card').forEach(card => {
+                        card.classList.remove('selected');
+                    });
+                }
+            }
+        });
+    });
+
+    // Sport options
+    document.querySelectorAll('.sport-option').forEach(option => {
+        option.addEventListener('click', function() {
+            const radio = this.querySelector('input[type="radio"]');
+            radio.checked = true;
+            
+            // Update visual state
+            document.querySelectorAll('.sport-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            this.querySelector('.sport-card').classList.add('selected');
+        });
+    });
+
+    // Availability options
+    document.querySelectorAll('.availability-option').forEach(option => {
+        option.addEventListener('click', function() {
+            const checkbox = this.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
+            
+            if (checkbox.checked) {
+                this.querySelector('.availability-card').classList.add('selected');
+            } else {
+                this.querySelector('.availability-card').classList.remove('selected');
+            }
+        });
+    });
+
+    // Preference options
+    document.querySelectorAll('.preference-option').forEach(option => {
+        option.addEventListener('click', function() {
+            const checkbox = this.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
+            
+            if (checkbox.checked) {
+                this.querySelector('.preference-card').classList.add('selected');
+            } else {
+                this.querySelector('.preference-card').classList.remove('selected');
+            }
+        });
+    });
+
+    // Agreement option
+    document.querySelector('.agreement-option').addEventListener('click', function() {
+        const checkbox = this.querySelector('input[type="checkbox"]');
+        checkbox.checked = !checkbox.checked;
         
-        // Scroll to top of form when changing steps
-        window.scrollTo({
-            top: document.querySelector('.container').offsetTop - 100,
-            behavior: 'smooth'
-        });
-    }
+        if (checkbox.checked) {
+            this.querySelector('.agreement-card').classList.add('selected');
+        } else {
+            this.querySelector('.agreement-card').classList.remove('selected');
+        }
+    });
 }
 
-function goToPrevStep(prevStep) {
-    currentStep = prevStep;
+function navigateToStep(step) {
+    if (step > currentStep) {
+        // Moving forward - validate current step first
+        if (!validateCurrentStep()) {
+            return;
+        }
+    }
+    
+    currentStep = step;
     showStep(currentStep);
     updateProgressBar();
     
-    // Scroll to top of form when changing steps
+    // Scroll to top
     window.scrollTo({
-        top: document.querySelector('.container').offsetTop - 100,
+        top: 0,
         behavior: 'smooth'
+    });
+}
+
+function showStep(stepNumber) {
+    // Hide all steps
+    document.querySelectorAll('.form-step').forEach(step => {
+        step.classList.remove('active');
+    });
+    
+    // Show current step
+    const currentStepElement = document.getElementById('step' + stepNumber);
+    if (currentStepElement) {
+        currentStepElement.classList.add('active');
+    }
+}
+
+function updateProgressBar() {
+    const progress = (currentStep / totalSteps) * 100;
+    const progressFill = document.getElementById('progressFill');
+    if (progressFill) {
+        progressFill.style.width = progress + '%';
+    }
+    
+    // Update step indicators
+    document.querySelectorAll('.step').forEach((step, index) => {
+        const stepNumber = index + 1;
+        if (stepNumber <= currentStep) {
+            step.classList.add('active');
+        } else {
+            step.classList.remove('active');
+        }
     });
 }
 
@@ -126,7 +231,7 @@ function validateCurrentStep() {
             // Validate interests
             const selectedInterests = document.querySelectorAll('input[name="interests"]:checked');
             if (selectedInterests.length === 0) {
-                document.getElementById('activitiesError').textContent = 'يرجى اختيار مجال نشاط واحد على الأقل';
+                document.getElementById('interestsError').textContent = 'يرجى اختيار مجال نشاط واحد على الأقل';
                 isValid = false;
             }
 
@@ -173,219 +278,80 @@ function validateCurrentStep() {
     return isValid;
 }
 
-function showStep(stepNumber) {
-    // Hide all steps
-    document.querySelectorAll('.form-step').forEach(step => {
-        step.classList.remove('active');
-    });
-    
-    // Show current step
-    const currentStepElement = document.getElementById('step' + stepNumber);
-    if (currentStepElement) {
-        currentStepElement.classList.add('active');
-    }
-}
-
-function updateProgressBar() {
-    const progress = (currentStep / totalSteps) * 100;
-    const progressFill = document.getElementById('progressFill');
-    if (progressFill) {
-        progressFill.style.width = progress + '%';
-    }
-    
-    // Update step indicators
-    document.querySelectorAll('.progress-step').forEach((step, index) => {
-        const stepNumber = index + 1;
-        if (stepNumber <= currentStep) {
-            step.classList.add('active');
-        } else {
-            step.classList.remove('active');
-        }
-    });
-}
-
-function setupInteractiveElements() {
-    // Interest cards
-    document.querySelectorAll('.interest-card').forEach(card => {
-        card.addEventListener('click', function() {
-            const checkbox = this.querySelector('input[type="checkbox"]');
-            checkbox.checked = !checkbox.checked;
-            
-            if (checkbox.checked) {
-                this.classList.add('selected');
-            } else {
-                this.classList.remove('selected');
-            }
-
-            // Show/hide sport options
-            if (checkbox.value === 'sport') {
-                const sportOptions = document.getElementById('sportOptions');
-                if (sportOptions) {
-                    sportOptions.style.display = checkbox.checked ? 'block' : 'none';
-                    
-                    // Clear sport selection when hiding
-                    if (!checkbox.checked) {
-                        document.querySelectorAll('input[name="sport"]').forEach(radio => {
-                            radio.checked = false;
-                        });
-                        document.querySelectorAll('.sport-btn').forEach(btn => {
-                            btn.classList.remove('selected');
-                        });
-                    }
-                }
-            }
-        });
-    });
-
-    // Sport buttons
-    document.querySelectorAll('.sport-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const radio = this.querySelector('input[type="radio"]');
-            radio.checked = true;
-            
-            // Update visual state
-            document.querySelectorAll('.sport-btn').forEach(b => {
-                b.classList.remove('selected');
-            });
-            this.classList.add('selected');
-        });
-    });
-
-    // Availability cards
-    document.querySelectorAll('.availability-card').forEach(card => {
-        card.addEventListener('click', function() {
-            const checkbox = this.querySelector('input[type="checkbox"]');
-            checkbox.checked = !checkbox.checked;
-            
-            if (checkbox.checked) {
-                this.classList.add('selected');
-            } else {
-                this.classList.remove('selected');
-            }
-        });
-    });
-
-    // Preference cards
-    document.querySelectorAll('.preference-card').forEach(card => {
-        card.addEventListener('click', function() {
-            const checkbox = this.querySelector('input[type="checkbox"]');
-            checkbox.checked = !checkbox.checked;
-            
-            if (checkbox.checked) {
-                this.classList.add('selected');
-            } else {
-                this.classList.remove('selected');
-            }
-        });
-    });
-
-    // Agreement card
-    const agreementCard = document.querySelector('.agreement-card');
-    if (agreementCard) {
-        agreementCard.addEventListener('click', function() {
-            const checkbox = document.getElementById('agree');
-            if (checkbox) {
-                checkbox.checked = !checkbox.checked;
-                
-                if (checkbox.checked) {
-                    this.classList.add('selected');
-                } else {
-                    this.classList.remove('selected');
-                }
-            }
-        });
+async function submitForm() {
+    if (!validateCurrentStep()) {
+        return;
     }
 
-    // Success modal close
-    const closeSuccess = document.getElementById('closeSuccess');
-    if (closeSuccess) {
-        closeSuccess.addEventListener('click', closeSuccessModal);
-    }
-}
-
-function setupLanguageSwitcher() {
-    const langButtons = document.querySelectorAll('.lang-btn');
+    const submitBtn = document.querySelector('.btn-submit');
+    const originalText = submitBtn.innerHTML;
     
-    langButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const lang = this.getAttribute('data-lang');
-            changeLanguage(lang);
-        });
-    });
-}
+    // Show loading state
+    submitBtn.innerHTML = '<span>جاري الإرسال...</span><i class="fas fa-spinner fa-spin"></i>';
+    submitBtn.disabled = true;
 
-function changeLanguage(lang) {
-    // Update active language button
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-    this.classList.add('active');
-    
-    // Update HTML direction and language
-    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-    document.documentElement.lang = lang;
-    
-    // Here you would typically update all text content based on language
-    // For now, we'll just show an alert to demonstrate it's working
-    console.log('Language changed to:', lang);
-}
-
-async function handleFormSubmit() {
-    if (validateCurrentStep()) {
-        const submitBtn = document.querySelector('.btn-submit');
-        const originalHTML = submitBtn.innerHTML;
+    try {
+        // Collect form data
+        const formData = new FormData(document.getElementById('registrationForm'));
         
-        // Show loading state
-        submitBtn.innerHTML = '<span>جاري الإرسال...</span><i class="fas fa-spinner fa-spin"></i>';
-        submitBtn.disabled = true;
-
-        try {
-            // Collect form data
-            const formData = new FormData(document.getElementById('registrationForm'));
-            
-            // Send to Formspree
-            const response = await fetch('https://formspree.io/f/xwpwdpze', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
-
-            if (response.ok) {
-                showSuccessModal();
-                document.getElementById('registrationForm').reset();
-                resetFormState();
-            } else {
-                throw new Error('Form submission failed');
+        // Add additional data
+        formData.append('_subject', 'CROWN Club Registration Form');
+        formData.append('_language', 'ar');
+        
+        // Send to Formspree
+        const response = await fetch('https://formspree.io/f/xwpwdpze', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
             }
-        } catch (error) {
-            showErrorModal();
-        } finally {
-            // Restore button state
-            submitBtn.innerHTML = originalHTML;
-            submitBtn.disabled = false;
+        });
+
+        if (response.ok) {
+            showSuccessModal();
+            document.getElementById('registrationForm').reset();
+            resetForm();
+        } else {
+            throw new Error('Form submission failed');
         }
+    } catch (error) {
+        showErrorModal();
+        console.error('Form submission error:', error);
+    } finally {
+        // Restore button state
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
     }
 }
 
-function resetFormState() {
+function resetForm() {
     // Reset to first step
     currentStep = 1;
-    showStep(1);
+    showStep(currentStep);
     updateProgressBar();
     
     // Reset all visual states
-    document.querySelectorAll('.interest-card, .sport-btn, .availability-card, .preference-card, .agreement-card').forEach(element => {
+    document.querySelectorAll('.interest-card, .sport-card, .availability-card, .preference-card, .agreement-card').forEach(element => {
         element.classList.remove('selected');
     });
     
-    const sportOptions = document.getElementById('sportOptions');
-    if (sportOptions) {
-        sportOptions.style.display = 'none';
-    }
+    // Hide sport section
+    document.getElementById('sportSection').style.display = 'none';
+    
+    // Clear all checkboxes and radios
+    document.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(input => {
+        input.checked = false;
+    });
 }
 
 function showSuccessModal() {
     const modal = document.getElementById('successModal');
+    const title = document.getElementById('modalTitle');
+    const message = document.getElementById('modalMessage');
+    
+    if (title) title.textContent = 'مرحباً في عائلة CROWN!';
+    if (message) message.textContent = 'تم استلام طلبك بنجاح وسنتواصل معك قريباً للترحيب بك رسمياً في النادي';
+    
     if (modal) {
         modal.style.display = 'flex';
     }
@@ -393,18 +359,50 @@ function showSuccessModal() {
 
 function showErrorModal() {
     const modal = document.getElementById('successModal');
-    const title = document.getElementById('successTitle');
-    const message = document.getElementById('successMessage');
+    const title = document.getElementById('modalTitle');
+    const message = document.getElementById('modalMessage');
     
     if (title) title.textContent = 'خطأ في الإرسال';
     if (message) message.textContent = 'حدث خطأ أثناء إرسال البيانات. يرجى المحاولة مرة أخرى.';
     
-    if (modal) modal.style.display = 'flex';
+    if (modal) {
+        modal.style.display = 'flex';
+    }
 }
 
-function closeSuccessModal() {
+function closeModal() {
     const modal = document.getElementById('successModal');
     if (modal) {
         modal.style.display = 'none';
     }
 }
+
+function switchLanguage(lang) {
+    // Update active language button
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    document.querySelector(`.lang-btn[data-lang="${lang}"]`).classList.add('active');
+    
+    // Update HTML attributes
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    
+    // Here you would typically update all text content
+    // For demonstration, we'll just log the language change
+    console.log('Language switched to:', lang);
+    
+    // In a real implementation, you would have translation objects
+    // and update all text content dynamically
+}
+
+// Add input validation for real-time feedback
+document.addEventListener('input', function(e) {
+    if (e.target.matches('input[required], textarea[required], select[required]')) {
+        const errorElement = document.getElementById(e.target.id + 'Error');
+        if (errorElement && e.target.value.trim()) {
+            errorElement.textContent = '';
+            e.target.style.borderColor = '';
+        }
+    }
+});
