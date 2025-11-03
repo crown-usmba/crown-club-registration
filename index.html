@@ -44,397 +44,360 @@
     <div class="progress-steps">
       <div class="progress-step active" data-step="1">
         <div class="step-indicator">1</div>
-        <span class="step-label" data-lang-key="step1">المعلومات الشخصية</span>
+        <span class="step-label">المعلومات الشخصية</span>
       </div>
       <div class="progress-step" data-step="2">
         <div class="step-indicator">2</div>
-        <span class="step-label" data-lang-key="step2">اهتمامات النادي</span>
+        <span class="step-label">اهتمامات النادي</span>
       </div>
       <div class="progress-step" data-step="3">
         <div class="step-indicator">3</div>
-        <span class="step-label" data-lang-key="step3">معلومات إضافية</span>
+        <span class="step-label">معلومات إضافية</span>
       </div>
     </div>
   </div>
 
   <div class="container">
-    <!-- Arabic Content -->
-    <div class="translation-content" data-lang="ar">
-      <div class="header">
-        <div class="header-content">
-          <h1>نادي <span class="highlight">CROWN</span></h1>
-          <p>للأنشطة الاقتصادية والاجتماعية والإنسانية والرياضية</p>
-          <a href="https://www.instagram.com/crown.club.usmba" target="_blank" class="instagram-link">
-            <i class="fab fa-instagram"></i> 
-            <span>تابعنا على الإنستغرام</span>
-          </a>
-        </div>
+    <div class="header">
+      <div class="header-content">
+        <h1>نادي <span class="highlight">CROWN</span></h1>
+        <p>للأنشطة الاقتصادية والاجتماعية والإنسانية والرياضية</p>
+        <a href="https://www.instagram.com/crown.club.usmba" target="_blank" class="instagram-link">
+          <i class="fab fa-instagram"></i> 
+          <span>تابعنا على الإنستغرام</span>
+        </a>
       </div>
+    </div>
 
-      <div class="form-container">
-        <form id="registrationForm" action="https://formspree.io/f/xwpwdpze" method="POST">
-          <!-- Step 1: Personal Information -->
-          <div class="form-step active" id="step1">
-            <div class="step-header">
-              <h2>المعلومات الشخصية</h2>
-              <p>املأ معلوماتك الأساسية للانضمام إلى عائلة CROWN</p>
-            </div>
-
-            <div class="form-grid">
-              <div class="form-group">
-                <div class="input-container">
-                  <input type="text" id="firstName" name="firstName" required>
-                  <label for="firstName">الاسم الأول</label>
-                  <div class="input-icon">
-                    <i class="fas fa-user"></i>
-                  </div>
-                </div>
-                <div class="error-message" id="firstNameError"></div>
-              </div>
-
-              <div class="form-group">
-                <div class="input-container">
-                  <input type="text" id="lastName" name="lastName" required>
-                  <label for="lastName">الاسم الأخير</label>
-                  <div class="input-icon">
-                    <i class="fas fa-user"></i>
-                  </div>
-                </div>
-                <div class="error-message" id="lastNameError"></div>
-              </div>
-
-              <div class="form-group">
-                <div class="input-container">
-                  <input type="text" id="cin" name="cin" required>
-                  <label for="cin">رقم بطاقة التعريف الوطنية (CIN)</label>
-                  <div class="input-icon">
-                    <i class="fas fa-id-card"></i>
-                  </div>
-                </div>
-                <div class="error-message" id="cinError"></div>
-              </div>
-
-              <div class="form-group">
-                <div class="input-container">
-                  <input type="text" id="massar" name="massar" required>
-                  <label for="massar">رقم مسار</label>
-                  <div class="input-icon">
-                    <i class="fas fa-barcode"></i>
-                  </div>
-                </div>
-                <div class="error-message" id="massarError"></div>
-              </div>
-
-              <div class="form-group">
-                <div class="input-container">
-                  <input type="email" id="email" name="email" required>
-                  <label for="email">البريد الإلكتروني الجامعي</label>
-                  <div class="input-icon">
-                    <i class="fas fa-envelope"></i>
-                  </div>
-                </div>
-                <div class="error-message" id="emailError"></div>
-              </div>
-
-              <div class="form-group">
-                <div class="input-container">
-                  <input type="tel" id="phone" name="phone" required>
-                  <label for="phone">رقم الهاتف</label>
-                  <div class="input-icon">
-                    <i class="fas fa-phone"></i>
-                  </div>
-                </div>
-                <div class="error-message" id="phoneError"></div>
-              </div>
-
-              <div class="form-group">
-                <div class="input-container">
-                  <input type="text" id="major" name="major" required>
-                  <label for="major">التخصص</label>
-                  <div class="input-icon">
-                    <i class="fas fa-graduation-cap"></i>
-                  </div>
-                </div>
-                <div class="error-message" id="majorError"></div>
-              </div>
-
-              <div class="form-group">
-                <div class="select-container">
-                  <select id="year" name="year" required>
-                    <option value="">اختر السنة</option>
-                    <option value="first-year">سنة أولى</option>
-                    <option value="second-year">سنة ثانية</option>
-                    <option value="third-year">سنة ثالثة</option>
-                    <option value="fourth-year">سنة رابعة</option>
-                    <option value="graduate">دراسات عليا</option>
-                  </select>
-                  <div class="select-icon">
-                    <i class="fas fa-chevron-down"></i>
-                  </div>
-                </div>
-                <div class="error-message" id="yearError"></div>
-              </div>
-            </div>
-
-            <div class="step-actions">
-              <button type="button" class="btn btn-next" data-next="2">
-                <span>التالي</span>
-                <i class="fas fa-arrow-left"></i>
-              </button>
-            </div>
+    <div class="form-container">
+      <form id="registrationForm" action="https://formspree.io/f/xwpwdpze" method="POST">
+        <!-- Step 1: Personal Information -->
+        <div class="form-step active" id="step1">
+          <div class="step-header">
+            <h2>المعلومات الشخصية</h2>
+            <p>املأ معلوماتك الأساسية للانضمام إلى عائلة CROWN</p>
           </div>
 
-          <!-- Step 2: Club Interests -->
-          <div class="form-step" id="step2">
-            <div class="step-header">
-              <h2>اهتمامات النادي</h2>
-              <p>اختر المجالات التي تثير اهتمامك وتناسب مهاراتك</p>
-            </div>
-
-            <div class="interests-grid">
-              <div class="interest-card" data-interest="economic">
-                <div class="interest-icon">
-                  <i class="fas fa-chart-line"></i>
+          <div class="form-grid">
+            <div class="form-group">
+              <div class="input-container">
+                <input type="text" id="firstName" name="firstName" required placeholder=" ">
+                <label for="firstName">الاسم الأول</label>
+                <div class="input-icon">
+                  <i class="fas fa-user"></i>
                 </div>
-                <h3>الأنشطة الاقتصادية</h3>
-                <p>ورشات العمل، المؤتمرات، والمشاريع الاقتصادية</p>
-                <input type="checkbox" name="interests" value="economic" hidden>
               </div>
-
-              <div class="interest-card" data-interest="social">
-                <div class="interest-icon">
-                  <i class="fas fa-users"></i>
-                </div>
-                <h3>الأنشطة الاجتماعية</h3>
-                <p>الفعاليات الاجتماعية والتطوعية والتبادل الثقافي</p>
-                <input type="checkbox" name="interests" value="social" hidden>
-              </div>
-
-              <div class="interest-card" data-interest="human">
-                <div class="interest-icon">
-                  <i class="fas fa-hands-helping"></i>
-                </div>
-                <h3>الأنشطة الإنسانية</h3>
-                <p>المبادرات الخيرية وحملات التبرع والتطوع</p>
-                <input type="checkbox" name="interests" value="human" hidden>
-              </div>
-
-              <div class="interest-card" data-interest="sport">
-                <div class="interest-icon">
-                  <i class="fas fa-running"></i>
-                </div>
-                <h3>الأنشطة الرياضية</h3>
-                <p>البطولات والأنشطة الرياضية واللياقة البدنية</p>
-                <input type="checkbox" name="interests" value="sport" hidden>
-              </div>
-            </div>
-
-            <div class="error-message" id="activitiesError"></div>
-
-            <!-- Sport Options -->
-            <div class="sport-options" id="sportOptions">
-              <h3>اختر الرياضة التي تفضل</h3>
-              <div class="sport-buttons">
-                <label class="sport-btn">
-                  <input type="radio" name="sport" value="volleyball" hidden>
-                  <div class="sport-content">
-                    <i class="fas fa-volleyball-ball"></i>
-                    <span>الكرة الطائرة</span>
-                  </div>
-                </label>
-                <label class="sport-btn">
-                  <input type="radio" name="sport" value="basketball" hidden>
-                  <div class="sport-content">
-                    <i class="fas fa-basketball-ball"></i>
-                    <span>كرة السلة</span>
-                  </div>
-                </label>
-              </div>
-              <div class="error-message" id="sportError"></div>
+              <div class="error-message" id="firstNameError"></div>
             </div>
 
             <div class="form-group">
-              <div class="textarea-container">
-                <textarea id="interest" name="interest" rows="3" required placeholder="أخبرنا بما يثير اهتمامك في نادينا..."></textarea>
+              <div class="input-container">
+                <input type="text" id="lastName" name="lastName" required placeholder=" ">
+                <label for="lastName">الاسم الأخير</label>
+                <div class="input-icon">
+                  <i class="fas fa-user"></i>
+                </div>
               </div>
-              <div class="error-message" id="interestError"></div>
+              <div class="error-message" id="lastNameError"></div>
             </div>
 
             <div class="form-group">
-              <div class="textarea-container">
-                <textarea id="experience" name="experience" rows="3" placeholder="شاركنا بخبرتك السابقة إن وجدت..."></textarea>
+              <div class="input-container">
+                <input type="text" id="cin" name="cin" required placeholder=" ">
+                <label for="cin">رقم بطاقة التعريف الوطنية (CIN)</label>
+                <div class="input-icon">
+                  <i class="fas fa-id-card"></i>
+                </div>
               </div>
+              <div class="error-message" id="cinError"></div>
             </div>
 
-            <div class="step-actions">
-              <button type="button" class="btn btn-prev" data-prev="1">
-                <i class="fas fa-arrow-right"></i>
-                <span>السابق</span>
-              </button>
-              <button type="button" class="btn btn-next" data-next="3">
-                <span>التالي</span>
-                <i class="fas fa-arrow-left"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- Step 3: Additional Information -->
-          <div class="form-step" id="step3">
-            <div class="step-header">
-              <h2>معلومات إضافية</h2>
-              <p>أخبرنا المزيد عن توافرك وتفضيلاتك</p>
-            </div>
-
-            <div class="availability-section">
-              <h3>متى تكون متاحاً عادةً للاجتماعات؟</h3>
-              <div class="availability-grid">
-                <label class="availability-card">
-                  <input type="checkbox" name="availability" value="weekday-mornings" hidden>
-                  <div class="availability-content">
-                    <i class="fas fa-sun"></i>
-                    <span>صباح أيام الأسبوع</span>
-                  </div>
-                </label>
-                <label class="availability-card">
-                  <input type="checkbox" name="availability" value="weekday-afternoons" hidden>
-                  <div class="availability-content">
-                    <i class="fas fa-cloud-sun"></i>
-                    <span>بعد ظهر أيام الأسبوع</span>
-                  </div>
-                </label>
-                <label class="availability-card">
-                  <input type="checkbox" name="availability" value="weekday-evenings" hidden>
-                  <div class="availability-content">
-                    <i class="fas fa-moon"></i>
-                    <span>مساء أيام الأسبوع</span>
-                  </div>
-                </label>
-                <label class="availability-card">
-                  <input type="checkbox" name="availability" value="weekends" hidden>
-                  <div class="availability-content">
-                    <i class="fas fa-calendar-weekend"></i>
-                    <span>عطلات نهاية الأسبوع</span>
-                  </div>
-                </label>
+            <div class="form-group">
+              <div class="input-container">
+                <input type="text" id="massar" name="massar" required placeholder=" ">
+                <label for="massar">رقم مسار</label>
+                <div class="input-icon">
+                  <i class="fas fa-barcode"></i>
+                </div>
               </div>
-              <div class="error-message" id="availabilityError"></div>
+              <div class="error-message" id="massarError"></div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-container">
+                <input type="email" id="email" name="email" required placeholder=" ">
+                <label for="email">البريد الإلكتروني الجامعي</label>
+                <div class="input-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+              </div>
+              <div class="error-message" id="emailError"></div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-container">
+                <input type="tel" id="phone" name="phone" required placeholder=" ">
+                <label for="phone">رقم الهاتف</label>
+                <div class="input-icon">
+                  <i class="fas fa-phone"></i>
+                </div>
+              </div>
+              <div class="error-message" id="phoneError"></div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-container">
+                <input type="text" id="major" name="major" required placeholder=" ">
+                <label for="major">التخصص</label>
+                <div class="input-icon">
+                  <i class="fas fa-graduation-cap"></i>
+                </div>
+              </div>
+              <div class="error-message" id="majorError"></div>
             </div>
 
             <div class="form-group">
               <div class="select-container">
-                <select id="hear-about" name="hear-about" required>
-                  <option value="">اختر خياراً</option>
-                  <option value="friend">صديق</option>
-                  <option value="professor">أستاذ</option>
-                  <option value="social-media">وسائل التواصل الاجتماعي</option>
-                  <option value="poster">ملصق/نشرة</option>
-                  <option value="university-website">موقع الجامعة</option>
-                  <option value="club-fair">معرض الأندية</option>
-                  <option value="other">آخر</option>
+                <select id="year" name="year" required>
+                  <option value="">اختر السنة</option>
+                  <option value="first-year">سنة أولى</option>
+                  <option value="second-year">سنة ثانية</option>
+                  <option value="third-year">سنة ثالثة</option>
+                  <option value="fourth-year">سنة رابعة</option>
+                  <option value="graduate">دراسات عليا</option>
                 </select>
                 <div class="select-icon">
                   <i class="fas fa-chevron-down"></i>
                 </div>
               </div>
-            </div>
-
-            <div class="preferences-section">
-              <div class="preference-item">
-                <label class="preference-card">
-                  <input type="checkbox" id="mailing-list" name="mailing-list" hidden>
-                  <div class="preference-content">
-                    <div class="preference-icon">
-                      <i class="fas fa-envelope"></i>
-                    </div>
-                    <div class="preference-text">
-                      <h4>أرغب في تلقي تحديثات النادي عبر البريد الإلكتروني</h4>
-                      <p>ابق على اطلاع بآخر الأخبار والفعاليات</p>
-                    </div>
-                    <div class="preference-toggle"></div>
-                  </div>
-                </label>
-              </div>
-
-              <div class="preference-item">
-                <label class="preference-card">
-                  <input type="checkbox" id="whatsapp-updates" name="whatsapp-updates" hidden>
-                  <div class="preference-content">
-                    <div class="preference-icon">
-                      <i class="fab fa-whatsapp"></i>
-                    </div>
-                    <div class="preference-text">
-                      <h4>أرغب في تلقي تحديثات النادي عبر واتساب</h4>
-                      <p>احصل على إشعارات فورية عن أنشطة النادي</p>
-                    </div>
-                    <div class="preference-toggle"></div>
-                  </div>
-                </label>
-              </div>
-            </div>
-
-            <div class="agreement-section">
-              <label class="agreement-card">
-                <input type="checkbox" id="agree" name="agree" required hidden>
-                <div class="agreement-content">
-                  <div class="checkmark">
-                    <i class="fas fa-check"></i>
-                  </div>
-                  <div class="agreement-text">
-                    <h4>أوافق على شروط وأحكام النادي</h4>
-                    <p>قرأت واستوعبت جميع الشروط والأحكام المطبقة</p>
-                  </div>
-                </div>
-              </label>
-              <div class="error-message" id="agreeError"></div>
-            </div>
-
-            <div class="step-actions">
-              <button type="button" class="btn btn-prev" data-prev="2">
-                <i class="fas fa-arrow-right"></i>
-                <span>السابق</span>
-              </button>
-              <button type="submit" class="btn btn-submit">
-                <span>إكمال التسجيل</span>
-                <i class="fas fa-crown"></i>
-              </button>
+              <div class="error-message" id="yearError"></div>
             </div>
           </div>
-        </form>
-      </div>
-    </div>
 
-    <!-- French Content -->
-    <div class="translation-content" data-lang="fr">
-      <div class="header">
-        <div class="header-content">
-          <h1>Club <span class="highlight">CROWN</span></h1>
-          <p>Pour les activités économiques, sociales, humanitaires et sportives</p>
-          <a href="https://www.instagram.com/crown.club.usmba" target="_blank" class="instagram-link">
-            <i class="fab fa-instagram"></i> 
-            <span>Suivez-nous sur Instagram</span>
-          </a>
+          <div class="step-actions">
+            <button type="button" class="btn btn-next" data-next="2">
+              <span>التالي</span>
+              <i class="fas fa-arrow-left"></i>
+            </button>
+          </div>
         </div>
-      </div>
 
-      <!-- Similar form structure in French would go here -->
-      <!-- For brevity, I'm showing only the header. The form structure would be similar to Arabic but translated -->
-    </div>
+        <!-- Step 2: Club Interests -->
+        <div class="form-step" id="step2">
+          <div class="step-header">
+            <h2>اهتمامات النادي</h2>
+            <p>اختر المجالات التي تثير اهتمامك وتناسب مهاراتك</p>
+          </div>
 
-    <!-- English Content -->
-    <div class="translation-content" data-lang="en">
-      <div class="header">
-        <div class="header-content">
-          <h1><span class="highlight">CROWN</span> Club</h1>
-          <p>For Economic, Social, Humanitarian and Sports Activities</p>
-          <a href="https://www.instagram.com/crown.club.usmba" target="_blank" class="instagram-link">
-            <i class="fab fa-instagram"></i> 
-            <span>Follow us on Instagram</span>
-          </a>
+          <div class="interests-grid">
+            <div class="interest-card" data-interest="economic">
+              <div class="interest-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <h3>الأنشطة الاقتصادية</h3>
+              <p>ورشات العمل، المؤتمرات، والمشاريع الاقتصادية</p>
+              <input type="checkbox" name="interests" value="economic" hidden>
+            </div>
+
+            <div class="interest-card" data-interest="social">
+              <div class="interest-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <h3>الأنشطة الاجتماعية</h3>
+              <p>الفعاليات الاجتماعية والتطوعية والتبادل الثقافي</p>
+              <input type="checkbox" name="interests" value="social" hidden>
+            </div>
+
+            <div class="interest-card" data-interest="human">
+              <div class="interest-icon">
+                <i class="fas fa-hands-helping"></i>
+              </div>
+              <h3>الأنشطة الإنسانية</h3>
+              <p>المبادرات الخيرية وحملات التبرع والتطوع</p>
+              <input type="checkbox" name="interests" value="human" hidden>
+            </div>
+
+            <div class="interest-card" data-interest="sport">
+              <div class="interest-icon">
+                <i class="fas fa-running"></i>
+              </div>
+              <h3>الأنشطة الرياضية</h3>
+              <p>البطولات والأنشطة الرياضية واللياقة البدنية</p>
+              <input type="checkbox" name="interests" value="sport" hidden>
+            </div>
+          </div>
+
+          <div class="error-message" id="activitiesError"></div>
+
+          <!-- Sport Options -->
+          <div class="sport-options" id="sportOptions">
+            <h3>اختر الرياضة التي تفضل</h3>
+            <div class="sport-buttons">
+              <label class="sport-btn">
+                <input type="radio" name="sport" value="volleyball" hidden>
+                <div class="sport-content">
+                  <i class="fas fa-volleyball-ball"></i>
+                  <span>الكرة الطائرة</span>
+                </div>
+              </label>
+              <label class="sport-btn">
+                <input type="radio" name="sport" value="basketball" hidden>
+                <div class="sport-content">
+                  <i class="fas fa-basketball-ball"></i>
+                  <span>كرة السلة</span>
+                </div>
+              </label>
+            </div>
+            <div class="error-message" id="sportError"></div>
+          </div>
+
+          <div class="form-group">
+            <div class="textarea-container">
+              <textarea id="interest" name="interest" rows="3" required placeholder="أخبرنا بما يثير اهتمامك في نادينا..."></textarea>
+            </div>
+            <div class="error-message" id="interestError"></div>
+          </div>
+
+          <div class="form-group">
+            <div class="textarea-container">
+              <textarea id="experience" name="experience" rows="3" placeholder="شاركنا بخبرتك السابقة إن وجدت..."></textarea>
+            </div>
+          </div>
+
+          <div class="step-actions">
+            <button type="button" class="btn btn-prev" data-prev="1">
+              <i class="fas fa-arrow-right"></i>
+              <span>السابق</span>
+            </button>
+            <button type="button" class="btn btn-next" data-next="3">
+              <span>التالي</span>
+              <i class="fas fa-arrow-left"></i>
+            </button>
+          </div>
         </div>
-      </div>
 
-      <!-- Similar form structure in English would go here -->
-      <!-- For brevity, I'm showing only the header. The form structure would be similar to Arabic but translated -->
+        <!-- Step 3: Additional Information -->
+        <div class="form-step" id="step3">
+          <div class="step-header">
+            <h2>معلومات إضافية</h2>
+            <p>أخبرنا المزيد عن توافرك وتفضيلاتك</p>
+          </div>
+
+          <div class="availability-section">
+            <h3>متى تكون متاحاً عادةً للاجتماعات؟</h3>
+            <div class="availability-grid">
+              <label class="availability-card">
+                <input type="checkbox" name="availability" value="weekday-mornings" hidden>
+                <div class="availability-content">
+                  <i class="fas fa-sun"></i>
+                  <span>صباح أيام الأسبوع</span>
+                </div>
+              </label>
+              <label class="availability-card">
+                <input type="checkbox" name="availability" value="weekday-afternoons" hidden>
+                <div class="availability-content">
+                  <i class="fas fa-cloud-sun"></i>
+                  <span>بعد ظهر أيام الأسبوع</span>
+                </div>
+              </label>
+              <label class="availability-card">
+                <input type="checkbox" name="availability" value="weekday-evenings" hidden>
+                <div class="availability-content">
+                  <i class="fas fa-moon"></i>
+                  <span>مساء أيام الأسبوع</span>
+                </div>
+              </label>
+              <label class="availability-card">
+                <input type="checkbox" name="availability" value="weekends" hidden>
+                <div class="availability-content">
+                  <i class="fas fa-calendar-weekend"></i>
+                  <span>عطلات نهاية الأسبوع</span>
+                </div>
+              </label>
+            </div>
+            <div class="error-message" id="availabilityError"></div>
+          </div>
+
+          <div class="form-group">
+            <div class="select-container">
+              <select id="hear-about" name="hear-about" required>
+                <option value="">كيف سمعت عنا؟</option>
+                <option value="friend">صديق</option>
+                <option value="professor">أستاذ</option>
+                <option value="social-media">وسائل التواصل الاجتماعي</option>
+                <option value="poster">ملصق/نشرة</option>
+                <option value="university-website">موقع الجامعة</option>
+                <option value="club-fair">معرض الأندية</option>
+                <option value="other">آخر</option>
+              </select>
+              <div class="select-icon">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="preferences-section">
+            <div class="preference-item">
+              <label class="preference-card">
+                <input type="checkbox" id="mailing-list" name="mailing-list" hidden>
+                <div class="preference-content">
+                  <div class="preference-icon">
+                    <i class="fas fa-envelope"></i>
+                  </div>
+                  <div class="preference-text">
+                    <h4>أرغب في تلقي تحديثات النادي عبر البريد الإلكتروني</h4>
+                    <p>ابق على اطلاع بآخر الأخبار والفعاليات</p>
+                  </div>
+                  <div class="preference-toggle"></div>
+                </div>
+              </label>
+            </div>
+
+            <div class="preference-item">
+              <label class="preference-card">
+                <input type="checkbox" id="whatsapp-updates" name="whatsapp-updates" hidden>
+                <div class="preference-content">
+                  <div class="preference-icon">
+                    <i class="fab fa-whatsapp"></i>
+                  </div>
+                  <div class="preference-text">
+                    <h4>أرغب في تلقي تحديثات النادي عبر واتساب</h4>
+                    <p>احصل على إشعارات فورية عن أنشطة النادي</p>
+                  </div>
+                  <div class="preference-toggle"></div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="agreement-section">
+            <label class="agreement-card">
+              <input type="checkbox" id="agree" name="agree" required hidden>
+              <div class="agreement-content">
+                <div class="checkmark">
+                  <i class="fas fa-check"></i>
+                </div>
+                <div class="agreement-text">
+                  <h4>أوافق على شروط وأحكام النادي</h4>
+                  <p>قرأت واستوعبت جميع الشروط والأحكام المطبقة</p>
+                </div>
+              </div>
+            </label>
+            <div class="error-message" id="agreeError"></div>
+          </div>
+
+          <div class="step-actions">
+            <button type="button" class="btn btn-prev" data-prev="2">
+              <i class="fas fa-arrow-right"></i>
+              <span>السابق</span>
+            </button>
+            <button type="submit" class="btn btn-submit">
+              <span>إكمال التسجيل</span>
+              <i class="fas fa-crown"></i>
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 
