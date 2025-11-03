@@ -68,17 +68,145 @@ const translations = {
         "error-message": "حدث خطأ أثناء إرسال البيانات. يرجى المحاولة مرة أخرى."
     },
     fr: {
-        // French translations would go here
+        "club-name": "Club CROWN",
+        "club-description": "Pour les activités économiques, sociales, humanitaires et sportives",
+        "follow-us": "Suivez-nous sur Instagram",
+        "personal-info": "Informations personnelles",
+        "first-name": "Prénom",
+        "first-name-error": "Veuillez saisir votre prénom",
+        "last-name": "Nom",
+        "last-name-error": "Veuillez saisir votre nom",
+        "cin": "Numéro de carte d'identité nationale (CIN)",
+        "cin-error": "Veuillez saisir votre numéro CIN",
+        "massar": "Numéro Massar",
+        "massar-error": "Veuillez saisir un numéro Massar valide",
+        "email": "E-mail universitaire",
+        "email-error": "Veuillez saisir une adresse e-mail universitaire valide",
+        "phone": "Numéro de téléphone",
+        "phone-error": "Veuillez saisir un numéro de téléphone valide",
+        "major": "Spécialité",
+        "major-error": "Veuillez saisir votre spécialité",
+        "year": "Année d'étude",
+        "select-year": "Choisir l'année",
+        "first-year": "Première année",
+        "second-year": "Deuxième année",
+        "third-year": "Troisième année",
+        "fourth-year": "Quatrième année",
+        "graduate": "Études supérieures",
+        "year-error": "Veuillez choisir votre année d'étude",
+        "interests": "Intérêts du club",
+        "activities-label": "Choisissez les domaines d'activité qui vous intéressent",
+        "economic-activities": "Activités économiques",
+        "social-activities": "Activités sociales",
+        "human-activities": "Activités humanitaires",
+        "sport-activities": "Activités sportives",
+        "activities-error": "Veuillez choisir au moins un domaine d'activité",
+        "sport-options-title": "Choisissez votre sport préféré",
+        "volleyball": "Volley-ball",
+        "basketball": "Basket-ball",
+        "sport-error": "Veuillez choisir un sport",
+        "interest": "Qu'est-ce qui vous intéresse dans notre club?",
+        "interest-error": "Veuillez nous dire ce qui vous intéresse dans notre club",
+        "experience": "Expérience préalable (le cas échéant)",
+        "additional-info": "Informations supplémentaires",
+        "availability": "Quand êtes-vous généralement disponible pour les réunions?",
+        "weekday-mornings": "Matin en semaine",
+        "weekday-afternoons": "Après-midi en semaine",
+        "weekday-evenings": "Soir en semaine",
+        "weekends": "Week-ends",
+        "availability-error": "Veuillez choisir votre disponibilité",
+        "hear-about": "Comment avez-vous entendu parler de nous?",
+        "select-option": "Choisir une option",
+        "friend": "Ami",
+        "professor": "Professeur",
+        "social-media": "Réseaux sociaux",
+        "poster": "Affiche/ brochure",
+        "university-website": "Site web de l'université",
+        "club-fair": "Forum des clubs",
+        "other": "Autre",
+        "mailing-list": "Je souhaite recevoir les mises à jour du club par e-mail",
+        "whatsapp-updates": "Je souhaite recevoir les mises à jour du club par WhatsApp",
+        "agree": "J'accepte les termes et conditions du club",
+        "agree-error": "Vous devez accepter les termes et conditions",
+        "submit": "Soumettre l'inscription",
+        "success-title": "Merci pour votre inscription!",
+        "success-message": "Nous avons reçu votre demande et nous vous contacterons bientôt avec plus d'informations."
     },
     en: {
-        // English translations would go here
+        "club-name": "CROWN Club",
+        "club-description": "For economic, social, humanitarian and sports activities",
+        "follow-us": "Follow us on Instagram",
+        "personal-info": "Personal Information",
+        "first-name": "First Name",
+        "first-name-error": "Please enter your first name",
+        "last-name": "Last Name",
+        "last-name-error": "Please enter your last name",
+        "cin": "National ID Card Number (CIN)",
+        "cin-error": "Please enter your CIN number",
+        "massar": "Massar Number",
+        "massar-error": "Please enter a valid Massar number",
+        "email": "University Email",
+        "email-error": "Please enter a valid university email",
+        "phone": "Phone Number",
+        "phone-error": "Please enter a valid phone number",
+        "major": "Major",
+        "major-error": "Please enter your major",
+        "year": "Study Year",
+        "select-year": "Select Year",
+        "first-year": "First Year",
+        "second-year": "Second Year",
+        "third-year": "Third Year",
+        "fourth-year": "Fourth Year",
+        "graduate": "Graduate Studies",
+        "year-error": "Please select your study year",
+        "interests": "Club Interests",
+        "activities-label": "Choose activity areas that interest you",
+        "economic-activities": "Economic Activities",
+        "social-activities": "Social Activities",
+        "human-activities": "Humanitarian Activities",
+        "sport-activities": "Sports Activities",
+        "activities-error": "Please choose at least one activity area",
+        "sport-options-title": "Choose your preferred sport",
+        "volleyball": "Volleyball",
+        "basketball": "Basketball",
+        "sport-error": "Please choose a sport",
+        "interest": "What interests you about our club?",
+        "interest-error": "Please tell us what interests you about our club",
+        "experience": "Previous Experience (if any)",
+        "additional-info": "Additional Information",
+        "availability": "When are you usually available for meetings?",
+        "weekday-mornings": "Weekday Mornings",
+        "weekday-afternoons": "Weekday Afternoons",
+        "weekday-evenings": "Weekday Evenings",
+        "weekends": "Weekends",
+        "availability-error": "Please choose your availability",
+        "hear-about": "How did you hear about us?",
+        "select-option": "Select an option",
+        "friend": "Friend",
+        "professor": "Professor",
+        "social-media": "Social Media",
+        "poster": "Poster/Flyer",
+        "university-website": "University Website",
+        "club-fair": "Club Fair",
+        "other": "Other",
+        "mailing-list": "I want to receive club updates via email",
+        "whatsapp-updates": "I want to receive club updates via WhatsApp",
+        "agree": "I agree to the club's terms and conditions",
+        "agree-error": "You must agree to the terms and conditions",
+        "submit": "Submit Registration",
+        "success-title": "Thank you for registering!",
+        "success-message": "We have received your application and will contact you soon with more information."
     }
 };
 
 document.addEventListener('DOMContentLoaded', function() {
+    let currentLang = 'ar';
+    
+    // Initialize the language on page load
+    switchLanguage(currentLang);
+    
     // تبديل اللغة
     const langButtons = document.querySelectorAll('.lang-btn');
-    let currentLang = 'ar';
     
     langButtons.forEach(btn => {
         btn.addEventListener('click', function() {
@@ -88,6 +216,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // تحديث حالة الأزرار
             langButtons.forEach(b => b.classList.remove('active'));
             this.classList.add('active');
+            
+            currentLang = lang;
         });
     });
     
@@ -96,21 +226,32 @@ document.addEventListener('DOMContentLoaded', function() {
         document.documentElement.lang = lang;
         document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
         
-        // تحديث النصوص
+        // تحديث جميع النصوص مع data-translate
         const elements = document.querySelectorAll('[data-translate]');
-        elements.forEach(el => {
-            const key = el.getAttribute('data-translate');
+        elements.forEach(element => {
+            const key = element.getAttribute('data-translate');
             if (translations[lang] && translations[lang][key]) {
-                el.textContent = translations[lang][key];
+                element.textContent = translations[lang][key];
             }
         });
+        
+        // تحديث عناصر خاصة
+        updateSpecialElements(lang);
+    }
+    
+    function updateSpecialElements(lang) {
+        // تحديث عناصر قد تحتاج معالجة خاصة
+        const titleElement = document.querySelector('title');
+        if (titleElement && translations[lang] && translations[lang]['club-name']) {
+            titleElement.textContent = translations[lang]['club-name'] + ' - Registration Form';
+        }
     }
     
     // عرض/إخفاء خيارات الرياضة
     const sportCheckbox = document.querySelector('input[value="sport"]');
     const sportOptions = document.getElementById('sportOptions');
     
-    if (sportCheckbox) {
+    if (sportCheckbox && sportOptions) {
         sportCheckbox.addEventListener('change', function() {
             sportOptions.style.display = this.checked ? 'block' : 'none';
             if (!this.checked) {
@@ -128,11 +269,12 @@ document.addEventListener('DOMContentLoaded', function() {
             // عرض رسالة تحميل
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'جاري الإرسال...';
+            submitBtn.textContent = currentLang === 'ar' ? 'جاري الإرسال...' : 
+                                  currentLang === 'fr' ? 'Envoi en cours...' : 'Sending...';
             submitBtn.disabled = true;
             
             try {
-                // إرسال النموذج إلى Formspree
+                // إرسال البيانات إلى Formspree
                 const formData = new FormData(this);
                 
                 const response = await fetch(this.action, {
@@ -145,9 +287,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 if (response.ok) {
                     // النموذج صالح، عرض رسالة النجاح
-                    document.getElementById('successTitle').textContent = translations[currentLang]['success-title'];
-                    document.getElementById('successMessage').textContent = translations[currentLang]['success-message'];
-                    document.getElementById('successModal').style.display = 'flex';
+                    showSuccessMessage();
                     
                     // إعادة تعيين النموذج
                     this.reset();
@@ -159,9 +299,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             } catch (error) {
                 // في حالة الخطأ، عرض رسالة خطأ
-                document.getElementById('successTitle').textContent = translations[currentLang]['error-title'];
-                document.getElementById('successMessage').textContent = translations[currentLang]['error-message'];
-                document.getElementById('successModal').style.display = 'flex';
+                showErrorMessage();
             } finally {
                 // استعادة حالة الزر
                 submitBtn.textContent = originalText;
@@ -169,6 +307,18 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+    
+    function showSuccessMessage() {
+        document.getElementById('successTitle').textContent = translations[currentLang]['success-title'];
+        document.getElementById('successMessage').textContent = translations[currentLang]['success-message'];
+        document.getElementById('successModal').style.display = 'flex';
+    }
+    
+    function showErrorMessage() {
+        document.getElementById('successTitle').textContent = translations[currentLang]['error-title'];
+        document.getElementById('successMessage').textContent = translations[currentLang]['error-message'];
+        document.getElementById('successModal').style.display = 'flex';
+    }
     
     // إغلاق نافذة النجاح
     document.getElementById('closeSuccess').addEventListener('click', function() {
@@ -192,13 +342,17 @@ document.addEventListener('DOMContentLoaded', function() {
             { id: 'phone', errorId: 'phoneError', key: 'phone-error' },
             { id: 'major', errorId: 'majorError', key: 'major-error' },
             { id: 'year', errorId: 'yearError', key: 'year-error' },
-            { id: 'interest', errorId: 'interestError', key: 'interest-error' }
+            { id: 'interest', errorId: 'interestError', key: 'interest-error' },
+            { id: 'hear-about', errorId: 'hearAboutError', key: 'select-option' }
         ];
         
         requiredFields.forEach(field => {
             const element = document.getElementById(field.id);
             if (!element || !element.value.trim()) {
-                document.getElementById(field.errorId).textContent = translations[currentLang][field.key];
+                const errorElement = document.getElementById(field.errorId);
+                if (errorElement) {
+                    errorElement.textContent = translations[currentLang][field.key];
+                }
                 isValid = false;
             }
         });
