@@ -61,11 +61,13 @@ const translations = {
         "whatsapp-updates": "أرغب في تلقي تحديثات النادي عبر واتساب",
         "agree": "أوافق على شروط وأحكام النادي",
         "agree-error": "يجب الموافقة على الشروط والأحكام",
-        "submit": "تقديم التسجيل",
-        "success-title": "شكراً لتسجيلك!",
-        "success-message": "لقد استلمنا طلبك وسنتواصل معك قريباً بمزيد من المعلومات.",
+        "submit": "إكمال التسجيل",
+        "success-title": "مرحباً في عائلة CROWN!",
+        "success-message": "تم استلام طلبك بنجاح وسنتواصل معك قريباً للترحيب بك رسمياً في النادي",
         "error-title": "خطأ في الإرسال",
-        "error-message": "حدث خطأ أثناء إرسال البيانات. يرجى المحاولة مرة أخرى."
+        "error-message": "حدث خطأ أثناء إرسال البيانات. يرجى المحاولة مرة أخرى.",
+        "next": "التالي",
+        "prev": "السابق"
     },
     fr: {
         "club-name": "Club CROWN",
@@ -129,8 +131,12 @@ const translations = {
         "agree": "J'accepte les termes et conditions du club",
         "agree-error": "Vous devez accepter les termes et conditions",
         "submit": "Soumettre l'inscription",
-        "success-title": "Merci pour votre inscription!",
-        "success-message": "Nous avons reçu votre demande et nous vous contacterons bientôt avec plus d'informations."
+        "success-title": "Bienvenue dans la famille CROWN!",
+        "success-message": "Votre demande a été reçue avec succès et nous vous contacterons bientôt pour vous accueillir officiellement dans le club",
+        "error-title": "Erreur d'envoi",
+        "error-message": "Une erreur s'est produite lors de l'envoi des données. Veuillez réessayer.",
+        "next": "Suivant",
+        "prev": "Précédent"
     },
     en: {
         "club-name": "CROWN Club",
@@ -193,199 +199,546 @@ const translations = {
         "whatsapp-updates": "I want to receive club updates via WhatsApp",
         "agree": "I agree to the club's terms and conditions",
         "agree-error": "You must agree to the terms and conditions",
-        "submit": "Submit Registration",
-        "success-title": "Thank you for registering!",
-        "success-message": "We have received your application and will contact you soon with more information."
+        "submit": "Complete Registration",
+        "success-title": "Welcome to the CROWN Family!",
+        "success-message": "Your application has been received successfully and we will contact you soon to officially welcome you to the club",
+        "error-title": "Submission Error",
+        "error-message": "An error occurred while sending data. Please try again.",
+        "next": "Next",
+        "prev": "Previous"
     }
 };
 
-document.addEventListener('DOMContentLoaded', function() {
-    let currentLang = 'ar';
-    
-    // Initialize the language on page load
-    switchLanguage(currentLang);
-    
-    // تبديل اللغة
-    const langButtons = document.querySelectorAll('.lang-btn');
-    
-    langButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const lang = this.getAttribute('data-lang');
-            switchLanguage(lang);
-            
-            // تحديث حالة الأزرار
-            langButtons.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            
-            currentLang = lang;
-        });
-    });
-    
-    function switchLanguage(lang) {
-        currentLang = lang;
-        document.documentElement.lang = lang;
-        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+// Main Application
+class CrownClubForm {
+    constructor() {
+        this.currentStep = 1;
+        this.totalSteps = 3;
+        this.currentLang = 'ar';
+        this.formData = {};
         
-        // تحديث جميع النصوص مع data-translate
+        this.init();
+    }
+
+    init() {
+        this.setupEventListeners();
+        this.setupLanguageSwitcher();
+        this.updateProgressBar();
+        this.animateStats();
+    }
+
+    setupEventListeners() {
+        // Step navigation
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.btn-next')) {
+                const nextStep = parseInt(e.target.closest('.btn-next').dataset.next);
+                this.nextStep(nextStep);
+            }
+            
+            if (e.target.closest('.btn-prev')) {
+                const prevStep = parseInt(e.target.closest('.btn-prev').dataset.prev);
+                this.prevStep(prevStep);
+            }
+        });
+
+        // Interest cards
+        document.querySelectorAll('.interest-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                this.toggleInterestCard(card);
+            });
+        });
+
+        // Sport buttons
+        document.querySelectorAll('.sport-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                this.selectSportButton(btn);
+            });
+        });
+
+        // Availability cards
+        document.querySelectorAll('.availability-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                this.toggleAvailabilityCard(card);
+            });
+        });
+
+        // Preference cards
+        document.querySelectorAll('.preference-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                this.togglePreferenceCard(card);
+            });
+        });
+
+        // Agreement card
+        document.querySelector('.agreement-card').addEventListener('click', (e) => {
+            this.toggleAgreementCard();
+        });
+
+        // Form submission
+        document.getElementById('registrationForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.submitForm();
+        });
+
+        // Success modal close
+        document.getElementById('closeSuccess').addEventListener('click', () => {
+            this.closeSuccessModal();
+        });
+
+        // Input focus effects
+        document.querySelectorAll('input, textarea, select').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('focused');
+            });
+            
+            input.addEventListener('blur', () => {
+                input.parentElement.classList.remove('focused');
+            });
+        });
+    }
+
+    setupLanguageSwitcher() {
+        const langButtons = document.querySelectorAll('.lang-btn');
+        
+        langButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const lang = btn.dataset.lang;
+                if (lang) {
+                    this.switchLanguage(lang);
+                }
+            });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            document.querySelector('.lang-dropdown').style.display = 'none';
+        });
+
+        // Initialize language
+        this.switchLanguage(this.currentLang);
+    }
+
+    switchLanguage(lang) {
+        this.currentLang = lang;
+        
+        // Update HTML direction and language
+        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+        document.documentElement.lang = lang;
+        
+        // Update all translatable elements
+        this.updateTranslations();
+        
+        // Update active language button
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.dataset.lang === lang) {
+                btn.classList.add('active');
+            }
+        });
+    }
+
+    updateTranslations() {
         const elements = document.querySelectorAll('[data-translate]');
+        
         elements.forEach(element => {
             const key = element.getAttribute('data-translate');
-            if (translations[lang] && translations[lang][key]) {
-                element.textContent = translations[lang][key];
+            if (translations[this.currentLang] && translations[this.currentLang][key]) {
+                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                    element.placeholder = translations[this.currentLang][key];
+                } else if (element.tagName === 'OPTION' && element.value === '') {
+                    element.textContent = translations[this.currentLang][key];
+                } else {
+                    element.textContent = translations[this.currentLang][key];
+                }
             }
         });
+
+        // Update button texts
+        document.querySelectorAll('.btn-next span').forEach(span => {
+            span.textContent = translations[this.currentLang]['next'];
+        });
         
-        // تحديث عناصر خاصة
-        updateSpecialElements(lang);
+        document.querySelectorAll('.btn-prev span').forEach(span => {
+            span.textContent = translations[this.currentLang]['prev'];
+        });
     }
-    
-    function updateSpecialElements(lang) {
-        // تحديث عناصر قد تحتاج معالجة خاصة
-        const titleElement = document.querySelector('title');
-        if (titleElement && translations[lang] && translations[lang]['club-name']) {
-            titleElement.textContent = translations[lang]['club-name'] + ' - Registration Form';
+
+    nextStep(nextStep) {
+        if (this.validateStep(this.currentStep)) {
+            this.currentStep = nextStep;
+            this.showStep(this.currentStep);
+            this.updateProgressBar();
         }
     }
-    
-    // عرض/إخفاء خيارات الرياضة
-    const sportCheckbox = document.querySelector('input[value="sport"]');
-    const sportOptions = document.getElementById('sportOptions');
-    
-    if (sportCheckbox && sportOptions) {
-        sportCheckbox.addEventListener('change', function() {
-            sportOptions.style.display = this.checked ? 'block' : 'none';
-            if (!this.checked) {
-                const sportRadios = document.querySelectorAll('input[name="sport"]');
-                sportRadios.forEach(radio => radio.checked = false);
+
+    prevStep(prevStep) {
+        this.currentStep = prevStep;
+        this.showStep(this.currentStep);
+        this.updateProgressBar();
+    }
+
+    showStep(stepNumber) {
+        // Hide all steps
+        document.querySelectorAll('.form-step').forEach(step => {
+            step.classList.remove('active');
+        });
+        
+        // Show current step
+        const currentStep = document.getElementById(`step${stepNumber}`);
+        if (currentStep) {
+            currentStep.classList.add('active');
+        }
+        
+        // Update progress steps
+        document.querySelectorAll('.step').forEach((step, index) => {
+            if (index + 1 <= stepNumber) {
+                step.classList.add('active');
+            } else {
+                step.classList.remove('active');
             }
         });
     }
-    
-    // التحقق من النموذج وإرساله
-    document.getElementById('registrationForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
+
+    updateProgressBar() {
+        const progress = (this.currentStep / this.totalSteps) * 100;
+        document.getElementById('progressFill').style.width = `${progress}%`;
+    }
+
+    validateStep(step) {
+        let isValid = true;
         
-        if (validateForm()) {
-            // عرض رسالة تحميل
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = currentLang === 'ar' ? 'جاري الإرسال...' : 
-                                  currentLang === 'fr' ? 'Envoi en cours...' : 'Sending...';
-            submitBtn.disabled = true;
-            
-            try {
-                // إرسال البيانات إلى Formspree
-                const formData = new FormData(this);
+        // Clear previous errors
+        document.querySelectorAll('.error-message').forEach(error => {
+            error.textContent = '';
+        });
+
+        switch(step) {
+            case 1:
+                // Validate personal information
+                const requiredFields = ['firstName', 'lastName', 'cin', 'massar', 'email', 'phone', 'major', 'year'];
                 
-                const response = await fetch(this.action, {
+                requiredFields.forEach(field => {
+                    const element = document.getElementById(field);
+                    if (!element || !element.value.trim()) {
+                        const errorElement = document.getElementById(`${field}Error`);
+                        if (errorElement) {
+                            errorElement.textContent = translations[this.currentLang][`${field.replace(/([A-Z])/g, '-$1').toLowerCase()}-error`];
+                        }
+                        isValid = false;
+                    }
+                });
+                break;
+
+            case 2:
+                // Validate interests
+                const selectedInterests = document.querySelectorAll('input[name="interests"]:checked');
+                if (selectedInterests.length === 0) {
+                    document.getElementById('activitiesError').textContent = translations[this.currentLang]['activities-error'];
+                    isValid = false;
+                }
+
+                // Validate sport if sport interest is selected
+                const sportInterest = document.querySelector('input[value="sport"]:checked');
+                if (sportInterest) {
+                    const selectedSport = document.querySelector('input[name="sport"]:checked');
+                    if (!selectedSport) {
+                        document.getElementById('sportError').textContent = translations[this.currentLang]['sport-error'];
+                        isValid = false;
+                    }
+                }
+
+                // Validate interest text
+                const interestText = document.getElementById('interest');
+                if (!interestText || !interestText.value.trim()) {
+                    document.getElementById('interestError').textContent = translations[this.currentLang]['interest-error'];
+                    isValid = false;
+                }
+                break;
+
+            case 3:
+                // Validate availability
+                const selectedAvailability = document.querySelectorAll('input[name="availability"]:checked');
+                if (selectedAvailability.length === 0) {
+                    document.getElementById('availabilityError').textContent = translations[this.currentLang]['availability-error'];
+                    isValid = false;
+                }
+
+                // Validate agreement
+                const agreement = document.getElementById('agree');
+                if (!agreement || !agreement.checked) {
+                    document.getElementById('agreeError').textContent = translations[this.currentLang]['agree-error'];
+                    isValid = false;
+                }
+                break;
+        }
+
+        return isValid;
+    }
+
+    toggleInterestCard(card) {
+        const checkbox = card.querySelector('input[type="checkbox"]');
+        checkbox.checked = !checkbox.checked;
+        
+        if (checkbox.checked) {
+            card.classList.add('selected');
+        } else {
+            card.classList.remove('selected');
+        }
+
+        // Show/hide sport options
+        if (checkbox.value === 'sport') {
+            const sportOptions = document.getElementById('sportOptions');
+            sportOptions.style.display = checkbox.checked ? 'block' : 'none';
+        }
+    }
+
+    selectSportButton(button) {
+        const radio = button.querySelector('input[type="radio"]');
+        radio.checked = true;
+        
+        // Update visual state
+        document.querySelectorAll('.sport-btn').forEach(btn => {
+            btn.classList.remove('selected');
+        });
+        button.classList.add('selected');
+    }
+
+    toggleAvailabilityCard(card) {
+        const checkbox = card.querySelector('input[type="checkbox"]');
+        checkbox.checked = !checkbox.checked;
+        
+        if (checkbox.checked) {
+            card.classList.add('selected');
+        } else {
+            card.classList.remove('selected');
+        }
+    }
+
+    togglePreferenceCard(card) {
+        const checkbox = card.querySelector('input[type="checkbox"]');
+        checkbox.checked = !checkbox.checked;
+        
+        if (checkbox.checked) {
+            card.classList.add('selected');
+        } else {
+            card.classList.remove('selected');
+        }
+    }
+
+    toggleAgreementCard() {
+        const checkbox = document.getElementById('agree');
+        checkbox.checked = !checkbox.checked;
+        
+        const card = document.querySelector('.agreement-card');
+        if (checkbox.checked) {
+            card.classList.add('selected');
+        } else {
+            card.classList.remove('selected');
+        }
+    }
+
+    async submitForm() {
+        if (this.validateStep(3)) {
+            const submitBtn = document.querySelector('.btn-submit');
+            const originalText = submitBtn.innerHTML;
+            
+            // Show loading state
+            submitBtn.innerHTML = this.currentLang === 'ar' ? 
+                '<span>جاري الإرسال...</span><i class="fas fa-spinner fa-spin"></i>' :
+                this.currentLang === 'fr' ?
+                '<span>Envoi en cours...</span><i class="fas fa-spinner fa-spin"></i>' :
+                '<span>Sending...</span><i class="fas fa-spinner fa-spin"></i>';
+            
+            submitBtn.disabled = true;
+
+            try {
+                // Collect form data
+                const formData = new FormData(document.getElementById('registrationForm'));
+                
+                // Send to Formspree
+                const response = await fetch('https://formspree.io/f/xwpwdpze', {
                     method: 'POST',
                     body: formData,
                     headers: {
                         'Accept': 'application/json'
                     }
                 });
-                
+
                 if (response.ok) {
-                    // النموذج صالح، عرض رسالة النجاح
-                    showSuccessMessage();
-                    
-                    // إعادة تعيين النموذج
-                    this.reset();
-                    if (sportOptions) {
-                        sportOptions.style.display = 'none';
-                    }
+                    this.showSuccessModal();
+                    document.getElementById('registrationForm').reset();
+                    this.resetFormState();
                 } else {
                     throw new Error('Form submission failed');
                 }
             } catch (error) {
-                // في حالة الخطأ، عرض رسالة خطأ
-                showErrorMessage();
+                this.showErrorModal();
             } finally {
-                // استعادة حالة الزر
-                submitBtn.textContent = originalText;
+                // Restore button state
+                submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
             }
         }
-    });
-    
-    function showSuccessMessage() {
-        document.getElementById('successTitle').textContent = translations[currentLang]['success-title'];
-        document.getElementById('successMessage').textContent = translations[currentLang]['success-message'];
-        document.getElementById('successModal').style.display = 'flex';
     }
-    
-    function showErrorMessage() {
-        document.getElementById('successTitle').textContent = translations[currentLang]['error-title'];
-        document.getElementById('successMessage').textContent = translations[currentLang]['error-message'];
-        document.getElementById('successModal').style.display = 'flex';
-    }
-    
-    // إغلاق نافذة النجاح
-    document.getElementById('closeSuccess').addEventListener('click', function() {
-        document.getElementById('successModal').style.display = 'none';
-    });
-    
-    function validateForm() {
-        let isValid = true;
+
+    resetFormState() {
+        // Reset to first step
+        this.currentStep = 1;
+        this.showStep(1);
+        this.updateProgressBar();
         
-        // إعادة تعيين رسائل الخطأ
-        const errorMessages = document.querySelectorAll('.error-message');
-        errorMessages.forEach(msg => msg.textContent = '');
-        
-        // التحقق من الحقول المطلوبة
-        const requiredFields = [
-            { id: 'firstName', errorId: 'firstNameError', key: 'first-name-error' },
-            { id: 'lastName', errorId: 'lastNameError', key: 'last-name-error' },
-            { id: 'cin', errorId: 'cinError', key: 'cin-error' },
-            { id: 'massar', errorId: 'massarError', key: 'massar-error' },
-            { id: 'email', errorId: 'emailError', key: 'email-error' },
-            { id: 'phone', errorId: 'phoneError', key: 'phone-error' },
-            { id: 'major', errorId: 'majorError', key: 'major-error' },
-            { id: 'year', errorId: 'yearError', key: 'year-error' },
-            { id: 'interest', errorId: 'interestError', key: 'interest-error' },
-            { id: 'hear-about', errorId: 'hearAboutError', key: 'select-option' }
-        ];
-        
-        requiredFields.forEach(field => {
-            const element = document.getElementById(field.id);
-            if (!element || !element.value.trim()) {
-                const errorElement = document.getElementById(field.errorId);
-                if (errorElement) {
-                    errorElement.textContent = translations[currentLang][field.key];
-                }
-                isValid = false;
-            }
+        // Reset all visual states
+        document.querySelectorAll('.interest-card, .sport-btn, .availability-card, .preference-card, .agreement-card').forEach(element => {
+            element.classList.remove('selected');
         });
         
-        // التحقق من اهتمامات النادي
-        const interests = document.querySelectorAll('input[name="interests"]:checked');
-        if (interests.length === 0) {
-            document.getElementById('activitiesError').textContent = translations[currentLang]['activities-error'];
-            isValid = false;
-        }
-        
-        // التحقق من الرياضة إذا كانت مختارة
-        if (sportCheckbox && sportCheckbox.checked) {
-            const sportSelected = document.querySelector('input[name="sport"]:checked');
-            if (!sportSelected) {
-                document.getElementById('sportError').textContent = translations[currentLang]['sport-error'];
-                isValid = false;
-            }
-        }
-        
-        // التحقق من التوفر
-        const availability = document.querySelectorAll('input[name="availability"]:checked');
-        if (availability.length === 0) {
-            document.getElementById('availabilityError').textContent = translations[currentLang]['availability-error'];
-            isValid = false;
-        }
-        
-        // التحقق من الموافقة على الشروط
-        if (!document.getElementById('agree').checked) {
-            document.getElementById('agreeError').textContent = translations[currentLang]['agree-error'];
-            isValid = false;
-        }
-        
-        return isValid;
+        document.getElementById('sportOptions').style.display = 'none';
     }
+
+    showSuccessModal() {
+        const modal = document.getElementById('successModal');
+        const title = document.getElementById('successTitle');
+        const message = document.getElementById('successMessage');
+        
+        title.textContent = translations[this.currentLang]['success-title'];
+        message.textContent = translations[this.currentLang]['success-message'];
+        
+        modal.style.display = 'flex';
+        
+        // Add confetti animation
+        this.createConfetti();
+    }
+
+    showErrorModal() {
+        const modal = document.getElementById('successModal');
+        const title = document.getElementById('successTitle');
+        const message = document.getElementById('successMessage');
+        
+        title.textContent = translations[this.currentLang]['error-title'];
+        message.textContent = translations[this.currentLang]['error-message'];
+        
+        modal.style.display = 'flex';
+    }
+
+    closeSuccessModal() {
+        document.getElementById('successModal').style.display = 'none';
+    }
+
+    createConfetti() {
+        const confettiContainer = document.querySelector('.confetti');
+        confettiContainer.innerHTML = '';
+        
+        for (let i = 0; i < 50; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti-piece';
+            confetti.style.cssText = `
+                left: ${Math.random() * 100}%;
+                animation-delay: ${Math.random() * 3}s;
+                background: hsl(${Math.random() * 360}, 100%, 50%);
+                transform: rotate(${Math.random() * 360}deg);
+            `;
+            confettiContainer.appendChild(confetti);
+        }
+    }
+
+    animateStats() {
+        const stats = {
+            membersCount: 150,
+            eventsCount: 25,
+            projectsCount: 12
+        };
+
+        Object.keys(stats).forEach(stat => {
+            const element = document.getElementById(stat);
+            if (element) {
+                this.animateCounter(element, 0, stats[stat], 2000);
+            }
+        });
+    }
+
+    animateCounter(element, start, end, duration) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const value = Math.floor(progress * (end - start) + start);
+            element.textContent = value + '+';
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    }
+}
+
+// Initialize the application when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    new CrownClubForm();
 });
+
+// Add CSS for animations
+const style = document.createElement('style');
+style.textContent = `
+    .form-step {
+        transition: all 0.5s ease-in-out;
+    }
+    
+    .form-step.active {
+        animation: slideIn 0.5s ease-in-out;
+    }
+    
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    .interest-card.selected,
+    .sport-btn.selected,
+    .availability-card.selected,
+    .preference-card.selected,
+    .agreement-card.selected {
+        transform: scale(1.05);
+        box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+    }
+    
+    .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none !important;
+    }
+    
+    .fa-spinner {
+        animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    .confetti-piece {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        animation: fall 3s linear forwards;
+    }
+    
+    @keyframes fall {
+        0% {
+            transform: translateY(-100px) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(500px) rotate(360deg);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
