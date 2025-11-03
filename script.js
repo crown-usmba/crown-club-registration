@@ -4,6 +4,7 @@ const totalSteps = 3;
 
 document.addEventListener('DOMContentLoaded', function() {
     initializeForm();
+    setupScrollHandling();
 });
 
 function initializeForm() {
@@ -11,10 +12,25 @@ function initializeForm() {
     setupInteractiveElements();
     setupLanguageSwitcher();
     updateProgressBar();
-    animateStats();
     
     // Hide sport options initially
     document.getElementById('sportOptions').style.display = 'none';
+}
+
+function setupScrollHandling() {
+    // Ensure progress bar stays visible when scrolling
+    window.addEventListener('scroll', function() {
+        const progressBar = document.querySelector('.form-progress');
+        if (progressBar) {
+            // The progress bar is already fixed, so no need to change position
+            // But we can add a slight background change on scroll if needed
+            if (window.scrollY > 50) {
+                progressBar.style.background = 'rgba(26, 26, 26, 0.98)';
+            } else {
+                progressBar.style.background = 'rgba(26, 26, 26, 0.95)';
+            }
+        }
+    });
 }
 
 function setupStepNavigation() {
@@ -48,6 +64,12 @@ function goToNextStep(nextStep) {
         currentStep = nextStep;
         showStep(currentStep);
         updateProgressBar();
+        
+        // Scroll to top of form when changing steps
+        window.scrollTo({
+            top: document.querySelector('.container').offsetTop - 100,
+            behavior: 'smooth'
+        });
     }
 }
 
@@ -55,6 +77,12 @@ function goToPrevStep(prevStep) {
     currentStep = prevStep;
     showStep(currentStep);
     updateProgressBar();
+    
+    // Scroll to top of form when changing steps
+    window.scrollTo({
+        top: document.querySelector('.container').offsetTop - 100,
+        behavior: 'smooth'
+    });
 }
 
 function validateCurrentStep() {
@@ -369,35 +397,6 @@ function closeSuccessModal() {
     if (modal) {
         modal.style.display = 'none';
     }
-}
-
-function animateStats() {
-    const stats = {
-        membersCount: 150,
-        eventsCount: 25,
-        projectsCount: 12
-    };
-
-    Object.keys(stats).forEach(stat => {
-        const element = document.getElementById(stat);
-        if (element) {
-            animateCounter(element, 0, stats[stat], 2000);
-        }
-    });
-}
-
-function animateCounter(element, start, end, duration) {
-    let startTimestamp = null;
-    const step = (timestamp) => {
-        if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        const value = Math.floor(progress * (end - start) + start);
-        element.textContent = value + '+';
-        if (progress < 1) {
-            window.requestAnimationFrame(step);
-        }
-    };
-    window.requestAnimationFrame(step);
 }
 
 // Add CSS for spinner animation
