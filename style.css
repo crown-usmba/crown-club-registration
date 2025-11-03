@@ -51,6 +51,58 @@ body {
   padding: 0;
 }
 
+/* Top Crown Logo */
+.top-crown-logo {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1001;
+  pointer-events: none;
+}
+
+.top-crown-logo .crown-3d {
+  width: 80px;
+  height: 70px;
+  margin: 0;
+}
+
+.top-crown-logo .crown-base {
+  height: 15px;
+}
+
+.top-crown-logo .crown-point {
+  width: 12px;
+  height: 30px;
+  bottom: 15px;
+}
+
+.top-crown-logo .crown-jewel-1 {
+  width: 8px;
+  height: 8px;
+  top: 12px;
+  left: 25%;
+}
+
+.top-crown-logo .crown-jewel-2 {
+  width: 10px;
+  height: 10px;
+  top: 10px;
+  left: 50%;
+}
+
+.top-crown-logo .crown-jewel-3 {
+  width: 8px;
+  height: 8px;
+  top: 12px;
+  left: 75%;
+}
+
+.top-crown-logo .crown-glow {
+  width: 100px;
+  height: 100px;
+}
+
 /* Animated Background */
 .bg-elements {
   position: fixed;
@@ -278,7 +330,7 @@ body {
 /* Form Progress */
 .form-progress {
   position: fixed;
-  top: 0;
+  top: 100px; /* Adjusted for top crown */
   left: 0;
   width: 100%;
   background: rgba(26, 26, 26, 0.95);
@@ -353,14 +405,14 @@ body {
 /* Container */
 .container {
   max-width: 1200px;
-  margin: 120px auto 40px;
+  margin: 180px auto 40px; /* Increased top margin for crown and progress */
   padding: 0 20px;
 }
 
 /* Header */
 .header {
   text-align: center;
-  padding: 3rem 2rem;
+  padding: 2rem; /* Reduced padding */
   background: var(--bg-card);
   backdrop-filter: blur(10px);
   border-radius: var(--border-radius-lg);
@@ -381,7 +433,7 @@ body {
 }
 
 .header-content h1 {
-  font-size: 3rem;
+  font-size: 2.5rem; /* Slightly smaller */
   font-weight: 700;
   margin-bottom: 1rem;
 }
@@ -394,9 +446,9 @@ body {
 }
 
 .header-content p {
-  font-size: 1.2rem;
+  font-size: 1.1rem; /* Slightly smaller */
   color: var(--text-secondary);
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem; /* Reduced margin */
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
@@ -983,30 +1035,36 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .top-crown-logo {
+    top: 10px;
+  }
+  
+  .top-crown-logo .crown-3d {
+    width: 60px;
+    height: 50px;
+  }
+  
+  .top-crown-logo .crown-point {
+    width: 8px;
+    height: 20px;
+    bottom: 10px;
+  }
+  
   .container {
-    margin: 100px auto 20px;
+    margin: 140px auto 20px;
     padding: 0 10px;
   }
   
   .header {
-    padding: 2rem 1rem;
+    padding: 1.5rem 1rem;
   }
   
   .header-content h1 {
     font-size: 2rem;
   }
   
-  .crown-3d {
-    width: 80px;
-    height: 70px;
-  }
-  
-  .crown-point {
-    width: 12px;
-    height: 30px;
-  }
-  
   .form-progress {
+    top: 70px;
     padding: 1rem;
   }
   
