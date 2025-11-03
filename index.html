@@ -14,7 +14,7 @@
             <h2>تسجيل الدخول للمشرف</h2>
             <input type="password" id="adminPassword" placeholder="كلمة المرور" class="form-control">
             <button class="btn" id="loginBtn">دخول</button>
-            <div class="error-message" id="loginError" style="text-align: center; margin-top: 10px;">كلمة المرور غير صحيحة</div>
+            <div class="error-message" id="loginError">كلمة المرور غير صحيحة</div>
         </div>
     </div>
 
@@ -28,214 +28,216 @@
             <div class="club-logo">
                 <i class="fas fa-crown"></i>
             </div>
-            <h1 data-key="club-name">نادي CROWN</h1>
-            <p data-key="club-description">للأنشطة الاقتصادية والاجتماعية والإنسانية والرياضية</p>
+            <h1>نادي CROWN</h1>
+            <p>للأنشطة الاقتصادية والاجتماعية والإنسانية والرياضية</p>
             <a href="https://www.instagram.com/crown.club.usmba?igsh=ajI3aGx3ZmZ1NzRm" target="_blank" class="instagram-link">
                 <i class="fab fa-instagram"></i>
-                <span data-key="follow-us">تابعنا على الإنستغرام</span>
+                تابعنا على الإنستغرام
             </a>
         </div>
         
         <div class="form-container">
-            <!-- النموذج العادي للمستخدمين -->
             <form id="registrationForm">
+                <!-- قسم المعلومات الشخصية -->
                 <div class="form-section">
                     <h2 class="section-title">
                         <i class="fas fa-user"></i>
-                        <span data-key="personal-info">المعلومات الشخصية</span>
+                        المعلومات الشخصية
                     </h2>
                     
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="firstName" class="required" data-key="first-name">الاسم الأول</label>
+                            <label for="firstName" class="required">الاسم الأول</label>
                             <input type="text" id="firstName" name="firstName" required>
-                            <div class="error-message" id="firstNameError" data-key="first-name-error">يرجى إدخال الاسم الأول</div>
+                            <div class="error-message" id="firstNameError">يرجى إدخال الاسم الأول</div>
                         </div>
                         
                         <div class="form-group">
-                            <label for="lastName" class="required" data-key="last-name">الاسم الأخير</label>
+                            <label for="lastName" class="required">الاسم الأخير</label>
                             <input type="text" id="lastName" name="lastName" required>
-                            <div class="error-message" id="lastNameError" data-key="last-name-error">يرجى إدخال الاسم الأخير</div>
+                            <div class="error-message" id="lastNameError">يرجى إدخال الاسم الأخير</div>
                         </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="cin" class="required" data-key="cin">رقم بطاقة التعريف الوطنية (CIN)</label>
+                            <label for="cin" class="required">رقم بطاقة التعريف الوطنية (CIN)</label>
                             <input type="text" id="cin" name="cin" required>
-                            <div class="error-message" id="cinError" data-key="cin-error">يرجى إدخال رقم بطاقة التعريف الوطنية</div>
+                            <div class="error-message" id="cinError">يرجى إدخال رقم بطاقة التعريف الوطنية</div>
                         </div>
                         
                         <div class="form-group">
-                            <label for="massar" class="required" data-key="massar">رقم مسار</label>
+                            <label for="massar" class="required">رقم مسار</label>
                             <input type="text" id="massar" name="massar" required>
-                            <div class="error-message" id="massarError" data-key="massar-error">يرجى إدخال رقم مسار صحيح</div>
+                            <div class="error-message" id="massarError">يرجى إدخال رقم مسار صحيح</div>
                         </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="email" class="required" data-key="email">البريد الإلكتروني الجامعي</label>
+                            <label for="email" class="required">البريد الإلكتروني الجامعي</label>
                             <input type="email" id="email" name="email" required>
-                            <div class="error-message" id="emailError" data-key="email-error">يرجى إدخال بريد إلكتروني جامعي صحيح</div>
+                            <div class="error-message" id="emailError">يرجى إدخال بريد إلكتروني جامعي صحيح</div>
                         </div>
                         
                         <div class="form-group">
-                            <label for="phone" class="required" data-key="phone">رقم الهاتف</label>
+                            <label for="phone" class="required">رقم الهاتف</label>
                             <input type="tel" id="phone" name="phone" required>
-                            <div class="error-message" id="phoneError" data-key="phone-error">يرجى إدخال رقم هاتف صحيح</div>
+                            <div class="error-message" id="phoneError">يرجى إدخال رقم هاتف صحيح</div>
                         </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="major" class="required" data-key="major">التخصص</label>
+                            <label for="major" class="required">التخصص</label>
                             <input type="text" id="major" name="major" required>
-                            <div class="error-message" id="majorError" data-key="major-error">يرجى إدخال تخصصك</div>
+                            <div class="error-message" id="majorError">يرجى إدخال تخصصك</div>
                         </div>
                         
                         <div class="form-group">
-                            <label for="year" class="required" data-key="year">سنة الدراسة</label>
+                            <label for="year" class="required">سنة الدراسة</label>
                             <select id="year" name="year" required>
-                                <option value="" data-key="select-year">اختر السنة</option>
-                                <option value="سنة أولى" data-key="first-year">سنة أولى</option>
-                                <option value="سنة ثانية" data-key="second-year">سنة ثانية</option>
-                                <option value="سنة ثالثة" data-key="third-year">سنة ثالثة</option>
-                                <option value="سنة رابعة" data-key="fourth-year">سنة رابعة</option>
-                                <option value="دراسات عليا" data-key="graduate">دراسات عليا</option>
+                                <option value="">اختر السنة</option>
+                                <option value="سنة أولى">سنة أولى</option>
+                                <option value="سنة ثانية">سنة ثانية</option>
+                                <option value="سنة ثالثة">سنة ثالثة</option>
+                                <option value="سنة رابعة">سنة رابعة</option>
+                                <option value="دراسات عليا">دراسات عليا</option>
                             </select>
-                            <div class="error-message" id="yearError" data-key="year-error">يرجى اختيار سنة الدراسة</div>
+                            <div class="error-message" id="yearError">يرجى اختيار سنة الدراسة</div>
                         </div>
                     </div>
                 </div>
                 
+                <!-- قسم اهتمامات النادي -->
                 <div class="form-section">
                     <h2 class="section-title">
                         <i class="fas fa-heart"></i>
-                        <span data-key="interests">اهتمامات النادي</span>
+                        اهتمامات النادي
                     </h2>
                     
                     <div class="form-group">
-                        <label class="required" data-key="activities-label">اختر مجالات الأنشطة التي تهمك</label>
+                        <label class="required">اختر مجالات الأنشطة التي تهمك</label>
                         <div class="activities-grid">
                             <div class="activity-card" data-activity="economic">
                                 <div class="activity-icon">
                                     <i class="fas fa-chart-line"></i>
                                 </div>
-                                <h3 data-key="economic-activities">الأنشطة الاقتصادية</h3>
+                                <h3>الأنشطة الاقتصادية</h3>
                             </div>
                             <div class="activity-card" data-activity="social">
                                 <div class="activity-icon">
                                     <i class="fas fa-users"></i>
                                 </div>
-                                <h3 data-key="social-activities">الأنشطة الاجتماعية</h3>
+                                <h3>الأنشطة الاجتماعية</h3>
                             </div>
                             <div class="activity-card" data-activity="human">
                                 <div class="activity-icon">
                                     <i class="fas fa-hands-helping"></i>
                                 </div>
-                                <h3 data-key="human-activities">الأنشطة الإنسانية</h3>
+                                <h3>الأنشطة الإنسانية</h3>
                             </div>
                             <div class="activity-card" data-activity="sport">
                                 <div class="activity-icon">
                                     <i class="fas fa-running"></i>
                                 </div>
-                                <h3 data-key="sport-activities">الأنشطة الرياضية</h3>
+                                <h3>الأنشطة الرياضية</h3>
                             </div>
                         </div>
                         <input type="hidden" id="selectedActivities" name="selectedActivities" required>
-                        <div class="error-message" id="activitiesError" data-key="activities-error">يرجى اختيار مجال نشاط واحد على الأقل</div>
+                        <div class="error-message" id="activitiesError">يرجى اختيار مجال نشاط واحد على الأقل</div>
                     </div>
                     
-                    <!-- خيارات الرياضة (تظهر فقط عند اختيار النشاط الرياضي) -->
+                    <!-- خيارات الرياضة -->
                     <div class="sports-options" id="sportsOptions">
-                        <h4 data-key="sport-options-title">اختر الرياضة التي تفضل</h4>
+                        <h4>اختر الرياضة التي تفضل</h4>
                         <div class="radio-group">
                             <div class="radio-option">
                                 <input type="radio" id="volleyball" name="sport" value="volleyball">
-                                <label for="volleyball" data-key="volleyball">الكرة الطائرة</label>
+                                <label for="volleyball">الكرة الطائرة</label>
                             </div>
                             <div class="radio-option">
                                 <input type="radio" id="basketball" name="sport" value="basketball">
-                                <label for="basketball" data-key="basketball">كرة السلة</label>
+                                <label for="basketball">كرة السلة</label>
                             </div>
                         </div>
-                        <div class="error-message" id="sportError" data-key="sport-error">يرجى اختيار رياضة واحدة</div>
+                        <div class="error-message" id="sportError">يرجى اختيار رياضة واحدة</div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="interest" class="required" data-key="interest">ما الذي يثير اهتمامك في نادينا؟</label>
+                        <label for="interest" class="required">ما الذي يثير اهتمامك في نادينا؟</label>
                         <textarea id="interest" name="interest" rows="4" required></textarea>
-                        <div class="error-message" id="interestError" data-key="interest-error">يرجى إخبارنا بما يثير اهتمامك في نادينا</div>
+                        <div class="error-message" id="interestError">يرجى إخبارنا بما يثير اهتمامك في نادينا</div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="experience" data-key="experience">الخبرة السابقة (إن وجدت)</label>
+                        <label for="experience">الخبرة السابقة (إن وجدت)</label>
                         <textarea id="experience" name="experience" rows="3"></textarea>
                     </div>
                 </div>
                 
+                <!-- قسم معلومات إضافية -->
                 <div class="form-section">
                     <h2 class="section-title">
                         <i class="fas fa-info-circle"></i>
-                        <span data-key="additional-info">معلومات إضافية</span>
+                        معلومات إضافية
                     </h2>
                     
                     <div class="form-group">
-                        <label for="availability" class="required" data-key="availability">متى تكون متاحاً عادةً للاجتماعات؟</label>
+                        <label for="availability" class="required">متى تكون متاحاً عادةً للاجتماعات؟</label>
                         <div class="radio-group">
                             <div class="radio-option">
                                 <input type="radio" id="weekdayMornings" name="availability" value="صباح أيام الأسبوع" required>
-                                <label for="weekdayMornings" data-key="weekday-mornings">صباح أيام الأسبوع</label>
+                                <label for="weekdayMornings">صباح أيام الأسبوع</label>
                             </div>
                             <div class="radio-option">
                                 <input type="radio" id="weekdayAfternoons" name="availability" value="بعد ظهر أيام الأسبوع">
-                                <label for="weekdayAfternoons" data-key="weekday-afternoons">بعد ظهر أيام الأسبوع</label>
+                                <label for="weekdayAfternoons">بعد ظهر أيام الأسبوع</label>
                             </div>
                             <div class="radio-option">
                                 <input type="radio" id="weekdayEvenings" name="availability" value="مساء أيام الأسبوع">
-                                <label for="weekdayEvenings" data-key="weekday-evenings">مساء أيام الأسبوع</label>
+                                <label for="weekdayEvenings">مساء أيام الأسبوع</label>
                             </div>
                             <div class="radio-option">
                                 <input type="radio" id="weekends" name="availability" value="عطلات نهاية الأسبوع">
-                                <label for="weekends" data-key="weekends">عطلات نهاية الأسبوع</label>
+                                <label for="weekends">عطلات نهاية الأسبوع</label>
                             </div>
                         </div>
-                        <div class="error-message" id="availabilityError" data-key="availability-error">يرجى اختيار مدى توافرك</div>
+                        <div class="error-message" id="availabilityError">يرجى اختيار مدى توافرك</div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="hearAbout" data-key="hear-about">كيف سمعت عنا؟</label>
+                        <label for="hearAbout">كيف سمعت عنا؟</label>
                         <select id="hearAbout" name="hearAbout">
-                            <option value="" data-key="select-option">اختر خياراً</option>
-                            <option value="صديق" data-key="friend">صديق</option>
-                            <option value="أستاذ" data-key="professor">أستاذ</option>
-                            <option value="وسائل التواصل الاجتماعي" data-key="social-media">وسائل التواصل الاجتماعي</option>
-                            <option value="ملصق/نشرة" data-key="poster">ملصق/نشرة</option>
-                            <option value="موقع الجامعة" data-key="university-website">موقع الجامعة</option>
-                            <option value="معرض الأندية" data-key="club-fair">معرض الأندية</option>
-                            <option value="آخر" data-key="other">آخر</option>
+                            <option value="">اختر خياراً</option>
+                            <option value="صديق">صديق</option>
+                            <option value="أستاذ">أستاذ</option>
+                            <option value="وسائل التواصل الاجتماعي">وسائل التواصل الاجتماعي</option>
+                            <option value="ملصق/نشرة">ملصق/نشرة</option>
+                            <option value="موقع الجامعة">موقع الجامعة</option>
+                            <option value="معرض الأندية">معرض الأندية</option>
+                            <option value="آخر">آخر</option>
                         </select>
                     </div>
                     
                     <div class="checkbox-group">
                         <input type="checkbox" id="mailingList" name="mailingList" checked>
-                        <label for="mailingList" data-key="mailing-list">أرغب في تلقي تحديثات النادي عبر البريد الإلكتروني</label>
+                        <label for="mailingList">أرغب في تلقي تحديثات النادي عبر البريد الإلكتروني</label>
                     </div>
                     
                     <div class="checkbox-group">
                         <input type="checkbox" id="whatsappUpdates" name="whatsappUpdates">
-                        <label for="whatsappUpdates" data-key="whatsapp-updates">أرغب في تلقي تحديثات النادي عبر واتساب</label>
+                        <label for="whatsappUpdates">أرغب في تلقي تحديثات النادي عبر واتساب</label>
                     </div>
                     
                     <div class="checkbox-group">
                         <input type="checkbox" id="agree" name="agree" required>
-                        <label for="agree" class="required" data-key="agree">أوافق على شروط وأحكام النادي</label>
-                        <div class="error-message" id="agreeError" data-key="agree-error">يجب الموافقة على الشروط والأحكام</div>
+                        <label for="agree" class="required">أوافق على شروط وأحكام النادي</label>
+                        <div class="error-message" id="agreeError">يجب الموافقة على الشروط والأحكام</div>
                     </div>
                 </div>
                 
-                <button type="submit" class="btn" data-key="submit">تقديم التسجيل</button>
+                <button type="submit" class="btn">تقديم التسجيل</button>
                 
                 <div class="loading-spinner" id="loadingSpinner">
                     <i class="fas fa-spinner"></i>
@@ -243,13 +245,13 @@
                 </div>
                 
                 <div class="success-message" id="successMessage">
-                    <h3 data-key="success-title">شكراً لتسجيلك!</h3>
-                    <p data-key="success-message">لقد استلمنا طلبك وسنتواصل معك قريباً بمزيد من المعلومات.</p>
+                    <h3>شكراً لتسجيلك!</h3>
+                    <p>لقد استلمنا طلبك وسنتواصل معك قريباً بمزيد من المعلومات.</p>
                 </div>
             </form>
 
-            <!-- لوحة المشرف (مخفية للمستخدمين العاديين) -->
-            <div class="admin-panel" id="adminPanel" style="display: none;">
+            <!-- لوحة المشرف -->
+            <div class="admin-panel" id="adminPanel">
                 <h2>المسجلين في نادي CROWN</h2>
                 
                 <div class="share-link-container">
@@ -288,8 +290,203 @@
     </div>
 
     <script>
-        // JavaScript code will go here - it's kept in the HTML file for functionality
-        // ... (the entire JavaScript code from the previous version)
+        // كود JavaScript الأساسي للوظائف
+        document.addEventListener('DOMContentLoaded', function() {
+            // إعدادات أساسية
+            const ADMIN_PASSWORD = "CROWN2024";
+            let isAdmin = false;
+            
+            // التحقق من صلاحية المشرف في الرابط
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('admin') === 'true') {
+                document.getElementById('adminLogin').style.display = 'flex';
+            }
+            
+            // تسجيل دخول المشرف
+            document.getElementById('loginBtn').addEventListener('click', function() {
+                const password = document.getElementById('adminPassword').value;
+                if (password === ADMIN_PASSWORD) {
+                    isAdmin = true;
+                    document.getElementById('adminLogin').style.display = 'none';
+                    document.getElementById('adminPanel').style.display = 'block';
+                    document.getElementById('registrationForm').style.display = 'none';
+                    setupShareLink();
+                } else {
+                    document.getElementById('loginError').style.display = 'block';
+                }
+            });
+            
+            // إعداد رابط المشاركة
+            function setupShareLink() {
+                const publicUrl = window.location.href.split('?')[0];
+                document.getElementById('shareUrl').value = publicUrl;
+            }
+            
+            // نسخ الرابط
+            document.getElementById('copyUrlBtn').addEventListener('click', function() {
+                const shareUrl = document.getElementById('shareUrl');
+                shareUrl.select();
+                navigator.clipboard.writeText(shareUrl.value);
+                alert('تم نسخ الرابط إلى الحافظة');
+            });
+            
+            // العودة إلى النموذج
+            document.getElementById('backToFormBtn').addEventListener('click', function() {
+                document.getElementById('adminPanel').style.display = 'none';
+                document.getElementById('registrationForm').style.display = 'block';
+            });
+            
+            // إدارة بطاقات النشاط
+            document.querySelectorAll('.activity-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    this.classList.toggle('selected');
+                    updateSelectedActivities();
+                    
+                    // إظهار/إخفاء خيارات الرياضة
+                    const isSportSelected = this.getAttribute('data-activity') === 'sport' && this.classList.contains('selected');
+                    document.getElementById('sportsOptions').style.display = isSportSelected ? 'block' : 'none';
+                    
+                    if (!isSportSelected) {
+                        document.querySelectorAll('input[name="sport"]').forEach(radio => {
+                            radio.checked = false;
+                        });
+                    }
+                });
+            });
+            
+            // تحديث الأنشطة المختارة
+            function updateSelectedActivities() {
+                const selectedCards = document.querySelectorAll('.activity-card.selected');
+                const activities = Array.from(selectedCards).map(card => card.getAttribute('data-activity'));
+                document.getElementById('selectedActivities').value = activities.join(',');
+            }
+            
+            // التحقق من صحة النموذج
+            document.getElementById('registrationForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // إخفاء جميع رسائل الخطأ
+                document.querySelectorAll('.error-message').forEach(msg => {
+                    msg.style.display = 'none';
+                });
+                
+                let isValid = true;
+                
+                // التحقق من الحقول المطلوبة
+                const requiredFields = [
+                    { id: 'firstName', errorId: 'firstNameError' },
+                    { id: 'lastName', errorId: 'lastNameError' },
+                    { id: 'cin', errorId: 'cinError' },
+                    { id: 'massar', errorId: 'massarError' },
+                    { id: 'email', errorId: 'emailError' },
+                    { id: 'phone', errorId: 'phoneError' },
+                    { id: 'major', errorId: 'majorError' },
+                    { id: 'year', errorId: 'yearError' },
+                    { id: 'interest', errorId: 'interestError' }
+                ];
+                
+                requiredFields.forEach(field => {
+                    const element = document.getElementById(field.id);
+                    if (!element.value.trim()) {
+                        document.getElementById(field.errorId).style.display = 'block';
+                        isValid = false;
+                    }
+                });
+                
+                // التحقق من البريد الإلكتروني
+                const email = document.getElementById('email').value;
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (email && !emailRegex.test(email)) {
+                    document.getElementById('emailError').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // التحقق من رقم الهاتف المغربي
+                const phone = document.getElementById('phone').value;
+                const phoneRegex = /^(06|07)\d{8}$/;
+                if (phone && !phoneRegex.test(phone)) {
+                    document.getElementById('phoneError').textContent = 'يرجى إدخال رقم هاتف مغربي صحيح (يبدأ بـ 06 أو 07)';
+                    document.getElementById('phoneError').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // التحقق من الأنشطة المختارة
+                const selectedActivities = document.getElementById('selectedActivities').value;
+                if (!selectedActivities) {
+                    document.getElementById('activitiesError').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // التحقق من الرياضة إذا كانت مختارة
+                const isSportSelected = document.querySelector('.activity-card[data-activity="sport"]').classList.contains('selected');
+                const sportSelected = document.querySelector('input[name="sport"]:checked');
+                if (isSportSelected && !sportSelected) {
+                    document.getElementById('sportError').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // التحقق من التوفر
+                const availability = document.querySelector('input[name="availability"]:checked');
+                if (!availability) {
+                    document.getElementById('availabilityError').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // التحقق من الموافقة
+                const agree = document.getElementById('agree');
+                if (!agree.checked) {
+                    document.getElementById('agreeError').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // إذا كان النموذج صالحاً
+                if (isValid) {
+                    document.getElementById('loadingSpinner').style.display = 'block';
+                    
+                    // محاكاة إرسال البيانات
+                    setTimeout(function() {
+                        document.getElementById('loadingSpinner').style.display = 'none';
+                        document.getElementById('successMessage').style.display = 'block';
+                        document.getElementById('registrationForm').reset();
+                        
+                        // إعادة تعيين البطاقات
+                        document.querySelectorAll('.activity-card').forEach(card => {
+                            card.classList.remove('selected');
+                        });
+                        updateSelectedActivities();
+                        document.getElementById('sportsOptions').style.display = 'none';
+                        
+                        // التمرير لرسالة النجاح
+                        document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+                    }, 2000);
+                }
+            });
+            
+            // تبديل اللغات
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const lang = this.getAttribute('data-lang');
+                    document.documentElement.lang = lang;
+                    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+                    document.body.style.direction = lang === 'ar' ? 'rtl' : 'ltr';
+                    document.body.style.textAlign = lang === 'ar' ? 'right' : 'left';
+                });
+            });
+            
+            // إخفاء رسائل الخطأ عند الكتابة
+            document.querySelectorAll('input, select, textarea').forEach(input => {
+                input.addEventListener('input', function() {
+                    const errorId = this.id + 'Error';
+                    const errorElement = document.getElementById(errorId);
+                    if (errorElement) {
+                        errorElement.style.display = 'none';
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>
