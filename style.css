@@ -334,15 +334,6 @@ body {
   color: var(--primary-color);
 }
 
-/* Translation System */
-.translation-content[data-lang] {
-  display: none;
-}
-
-.translation-content[data-lang="ar"] {
-  display: block;
-}
-
 /* Animated Background */
 .bg-elements {
   position: fixed;
@@ -499,6 +490,11 @@ body {
   margin-bottom: 2rem;
 }
 
+/* Form Group */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
 /* Input Styles */
 .input-container {
   position: relative;
@@ -545,7 +541,9 @@ body {
 }
 
 .input-container input:focus + label,
-.input-container input:not(:placeholder-shown) + label {
+.input-container input:not(:placeholder-shown) + label,
+.textarea-container textarea:focus + label,
+.textarea-container textarea:not(:placeholder-shown) + label {
   top: -0.5rem;
   font-size: 0.8rem;
   color: var(--primary-color);
@@ -871,6 +869,13 @@ body {
   box-shadow: var(--shadow-gold);
 }
 
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
 .step-actions {
   display: flex;
   justify-content: space-between;
@@ -903,6 +908,7 @@ body {
   border-radius: var(--border-radius);
   cursor: pointer;
   transition: all 0.3s ease;
+  font-family: inherit;
 }
 
 .lang-btn.active {
@@ -1081,4 +1087,14 @@ body {
     width: 100%;
     justify-content: center;
   }
+}
+
+/* Spinner Animation */
+.fa-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
