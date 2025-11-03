@@ -8,6 +8,9 @@
     --primary-gold: #D4AF37;
     --dark-gold: #B8941F;
     --light-gold: #FFD700;
+    --royal-blue: #4169E1;
+    --royal-purple: #7851A9;
+    --deep-purple: #4B0082;
     --bg-dark: #0a0a0a;
     --bg-card: #1a1a1a;
     --text-light: #ffffff;
@@ -15,13 +18,11 @@
     --border-color: rgba(212, 175, 55, 0.3);
     --success-color: #10b981;
     --error-color: #ef4444;
-    --accent-purple: #8B5CF6;
-    --accent-blue: #3B82F6;
 }
 
 body {
     font-family: 'Cairo', sans-serif;
-    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f23 100%);
     color: var(--text-light);
     line-height: 1.6;
     min-height: 100vh;
@@ -37,10 +38,34 @@ body::before {
     width: 100%;
     height: 100%;
     background: 
-        radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+        radial-gradient(circle at 20% 80%, rgba(65, 105, 225, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(120, 81, 169, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
     z-index: -1;
+}
+
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    background: radial-gradient(circle, var(--primary-gold), transparent);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: float 15s infinite linear;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-20px) translateX(10px); }
+    100% { transform: translateY(0) translateX(0); }
 }
 
 /* Crown Logo */
@@ -140,7 +165,7 @@ body::before {
 
 .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--dark-gold), var(--primary-gold), var(--light-gold));
+    background: linear-gradient(90deg, var(--royal-purple), var(--royal-blue), var(--primary-gold));
     border-radius: 3px;
     transition: width 0.5s ease;
     width: 33.33%;
@@ -202,9 +227,9 @@ body::before {
 }
 
 .step.active .step-number {
-    background: linear-gradient(45deg, var(--dark-gold), var(--primary-gold));
-    color: var(--bg-dark);
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+    background: linear-gradient(45deg, var(--royal-purple), var(--royal-blue));
+    color: var(--text-light);
+    box-shadow: 0 0 15px rgba(120, 81, 169, 0.5);
 }
 
 .step-text {
@@ -222,13 +247,13 @@ body::before {
 .header {
     text-align: center;
     padding: 40px;
-    background: var(--bg-card);
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(10, 10, 10, 0.9));
     border-radius: 20px;
     border: 1px solid var(--border-color);
     margin-bottom: 30px;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .header::before {
@@ -238,7 +263,7 @@ body::before {
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, var(--dark-gold), var(--primary-gold), var(--light-gold));
+    background: linear-gradient(90deg, var(--royal-purple), var(--royal-blue), var(--primary-gold));
 }
 
 .header h1 {
@@ -248,7 +273,7 @@ body::before {
 }
 
 .highlight {
-    background: linear-gradient(45deg, var(--light-gold), var(--primary-gold), var(--accent-purple));
+    background: linear-gradient(45deg, var(--light-gold), var(--primary-gold), var(--royal-blue));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -265,28 +290,28 @@ body::before {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: linear-gradient(45deg, var(--dark-gold), var(--primary-gold));
-    color: var(--bg-dark);
+    background: linear-gradient(45deg, var(--royal-purple), var(--royal-blue));
+    color: var(--text-light);
     text-decoration: none;
     padding: 12px 25px;
     border-radius: 10px;
     font-weight: bold;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    box-shadow: 0 4px 15px rgba(65, 105, 225, 0.3);
 }
 
 .instagram-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.6);
+    box-shadow: 0 8px 20px rgba(65, 105, 225, 0.6);
 }
 
 /* Form Styles */
 .form-wrapper {
-    background: var(--bg-card);
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(10, 10, 10, 0.9));
     border-radius: 20px;
     border: 1px solid var(--border-color);
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .form-step {
@@ -331,7 +356,7 @@ body::before {
     transform: translateX(-50%);
     width: 50px;
     height: 3px;
-    background: linear-gradient(90deg, var(--dark-gold), var(--primary-gold));
+    background: linear-gradient(90deg, var(--royal-purple), var(--royal-blue));
     border-radius: 2px;
 }
 
@@ -456,6 +481,7 @@ body::before {
 .interest-card:hover {
     transform: translateY(-5px);
     border-color: var(--primary-gold);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 .interest-card:hover::before {
@@ -541,6 +567,7 @@ body::before {
 
 .sport-card:hover {
     transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .sport-card i {
@@ -585,6 +612,7 @@ body::before {
 
 .availability-card:hover {
     transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .availability-card i {
@@ -629,17 +657,18 @@ body::before {
 
 .preference-card:hover {
     transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .preference-icon {
     width: 50px;
     height: 50px;
-    background: linear-gradient(45deg, var(--dark-gold), var(--primary-gold));
+    background: linear-gradient(45deg, var(--royal-purple), var(--royal-blue));
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--bg-dark);
+    color: var(--text-light);
     font-size: 1.2rem;
     transition: all 0.3s ease;
 }
@@ -686,6 +715,7 @@ body::before {
 
 .agreement-card:hover {
     transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .checkmark {
@@ -762,9 +792,9 @@ body::before {
 .btn-next,
 .btn-submit,
 .btn-success {
-    background: linear-gradient(45deg, var(--dark-gold), var(--primary-gold));
-    color: var(--bg-dark);
-    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    background: linear-gradient(45deg, var(--royal-purple), var(--royal-blue));
+    color: var(--text-light);
+    box-shadow: 0 4px 15px rgba(65, 105, 225, 0.3);
 }
 
 .btn-prev {
@@ -776,7 +806,7 @@ body::before {
 
 .btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+    box-shadow: 0 8px 20px rgba(65, 105, 225, 0.6);
 }
 
 .btn:disabled {
@@ -802,7 +832,7 @@ body::before {
     left: 20px;
     display: flex;
     gap: 10px;
-    background: var(--bg-card);
+    background: rgba(26, 26, 26, 0.9);
     padding: 10px;
     border-radius: 10px;
     border: 1px solid var(--border-color);
@@ -822,8 +852,8 @@ body::before {
 }
 
 .lang-btn.active {
-    background: linear-gradient(45deg, var(--dark-gold), var(--primary-gold));
-    color: var(--bg-dark);
+    background: linear-gradient(45deg, var(--royal-purple), var(--royal-blue));
+    color: var(--text-light);
 }
 
 .lang-btn:hover {
@@ -846,7 +876,7 @@ body::before {
 }
 
 .modal-content {
-    background: var(--bg-card);
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.95), rgba(10, 10, 10, 0.95));
     border-radius: 20px;
     padding: 40px;
     text-align: center;
@@ -866,7 +896,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 5px;
-    background: linear-gradient(90deg, var(--dark-gold), var(--primary-gold), var(--light-gold));
+    background: linear-gradient(90deg, var(--royal-purple), var(--royal-blue), var(--primary-gold));
 }
 
 @keyframes modalSlideIn {
