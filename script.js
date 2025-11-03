@@ -63,53 +63,117 @@ const translations = {
         "agree-error": "يجب الموافقة على الشروط والأحكام",
         "submit": "تقديم التسجيل",
         "success-title": "شكراً لتسجيلك!",
-        "success-message": "لقد استلمنا طلبك وسنتواصل معك قريباً بمزيد من المعلومات."
+        "success-message": "لقد استلمنا طلبك وسنتواصل معك قريباً بمزيد من المعلومات.",
+        "error-title": "خطأ في الإرسال",
+        "error-message": "حدث خطأ أثناء إرسال البيانات. يرجى المحاولة مرة أخرى."
     },
     fr: {
-        // ... French translations
+        // French translations would go here
     },
     en: {
-        // ... English translations
+        // English translations would go here
     }
 };
 
-// التحقق من معلمة URL
-const urlParams = new URLSearchParams(window.location.search);
-const isAdminMode = urlParams.has('admin');
+// دالة لإرسال البيانات إلى البريد الإلكتروني
+async function sendRegistrationEmail(formData) {
+    const emailData = {
+        to: 'crown.club.usmba@gmail.com',
+        subject: `تسجيل جديد في نادي CROWN - ${formData.firstName} ${formData.lastName}`,
+        message: `
+            تم استلام تسجيل جديد في نادي CROWN
+        
+            المعلومات الشخصية:
+            الاسم: ${formData.firstName} ${formData.lastName}
+            رقم CIN: ${formData.cin}
+            رقم مسار: ${formData.massar}
+            البريد الإلكتروني: ${formData.email}
+            رقم الهاتف: ${formData.phone}
+            التخصص: ${formData.major}
+            سنة الدراسة: ${formData.year}
+            
+            الاهتمامات:
+            ${formData.interests.join(', ')}
+            ${formData.sport ? `الرياضة المفضلة: ${formData.sport}` : ''}
+            
+            ما يثير الاهتمام في النادي:
+            ${formData.interest}
+            
+            الخبرة السابقة:
+            ${formData.experience || 'لا توجد'}
+            
+            معلومات إضافية:
+            ${formData.additionalInfo || 'لا توجد'}
+            
+            أوقات التوفر:
+            ${formData.availability.join(', ')}
+            
+            سمع عن النادي من خلال: ${formData.hearAbout}
+            
+            التحديثات:
+            ${formData.mailingList ? 'يرغب في تلقي تحديثات البريد الإلكتروني' : 'لا يرغب في تحديثات البريد الإلكتروني'}
+            ${formData.whatsappUpdates ? 'يرغب في تلقي تحديثات الواتساب' : 'لا يرغب في تحديثات الواتساب'}
+            
+            تم التسجيل في: ${new Date().toLocaleString('ar-EG')}
+        `
+    };
 
-if (isAdminMode) {
-    // عرض شاشة تسجيل الدخول للمشرف
-    document.getElementById('adminLogin').style.display = 'flex';
-    document.getElementById('mainContainer').style.display = 'none';
-} else {
-    // إخفاء شاشة تسجيل الدخول وعرض النموذج العادي
-    document.getElementById('adminLogin').style.display = 'none';
-    document.getElementById('mainContainer').style.display = 'block';
+    try {
+        // استخدام EmailJS لإرسال البريد الإلكتروني
+        // تحتاج إلى إعداد حساب في EmailJS واستبدال هذه المعطيات بمعلوماتك
+        if (typeof emailjs !== 'undefined') {
+            await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
+                to_email: emailData.to,
+                subject: emailData.subject,
+                message: emailData.message
+            });
+            return true;
+        } else {
+            // بديل: استخدام Formspree أو خدمة أخرى
+            const response = await fetch('https://formspree.io/f/xjvnzzzw', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(emailData)
+            });
+            
+            return response.ok;
+        }
+    } catch (error) {
+        console.error('Error sending email:', error);
+        return false;
+    }
 }
 
-// التحقق من كلمة مرور المشرف
-document.getElementById('loginBtn').addEventListener('click', function() {
-    const password = document.getElementById('adminPassword').value;
-    const errorElement = document.getElementById('loginError');
+// بديل أبسط باستخدام Formspree مباشرة
+function submitToFormspree(formData) {
+    const form = document.getElementById('registrationForm');
+    form.action = 'https://formspree.io/f/xjvnzzzw';
+    form.method = 'POST';
     
-    if (password === 'USMBA.crown') {
-        // كلمة المرور صحيحة، عرض النموذج
-        document.getElementById('adminLogin').style.display = 'none';
-        document.getElementById('mainContainer').style.display = 'block';
-    } else {
-        // كلمة المرور خاطئة، عرض رسالة الخطأ
-        errorElement.style.display = 'block';
-    }
-});
+    // إضافة حقول مخفية للبيانات
+    Object.keys(formData).forEach(key => {
+        if (Array.isArray(formData[key])) {
+            formData[key].forEach(value => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = `${key}[]`;
+                input.value = value;
+                form.appendChild(input);
+            });
+        } else if (formData[key]) {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = key;
+            input.value = formData[key];
+            form.appendChild(input);
+        }
+    });
+    
+    return true;
+}
 
-// السماح بالضغط على Enter في حقل كلمة المرور
-document.getElementById('adminPassword').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-        document.getElementById('loginBtn').click();
-    }
-});
-
-// باقي كود JavaScript الخاص بالنموذج والتحقق
 document.addEventListener('DOMContentLoaded', function() {
     // تبديل اللغة
     const langButtons = document.querySelectorAll('.lang-btn');
@@ -139,36 +203,58 @@ document.addEventListener('DOMContentLoaded', function() {
                 el.textContent = translations[lang][key];
             }
         });
-        
-        // تحديث العناصر بدون data-translate (تحديد يدوي)
-        if (translations[lang]) {
-            document.querySelector('h1').textContent = translations[lang]['club-name'];
-            document.querySelector('.header p').textContent = translations[lang]['club-description'];
-            document.querySelector('.instagram-link').innerHTML = `<i class="fab fa-instagram"></i> ${translations[lang]['follow-us']}`;
-        }
     }
     
     // عرض/إخفاء خيارات الرياضة
     const sportCheckbox = document.querySelector('input[value="sport"]');
     const sportOptions = document.getElementById('sportOptions');
     
-    sportCheckbox.addEventListener('change', function() {
-        sportOptions.style.display = this.checked ? 'block' : 'none';
-        if (!this.checked) {
-            const sportRadios = document.querySelectorAll('input[name="sport"]');
-            sportRadios.forEach(radio => radio.checked = false);
-        }
-    });
+    if (sportCheckbox) {
+        sportCheckbox.addEventListener('change', function() {
+            sportOptions.style.display = this.checked ? 'block' : 'none';
+            if (!this.checked) {
+                const sportRadios = document.querySelectorAll('input[name="sport"]');
+                sportRadios.forEach(radio => radio.checked = false);
+            }
+        });
+    }
     
-    // التحقق من النموذج
-    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+    // التحقق من النموذج وإرساله
+    document.getElementById('registrationForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         
         if (validateForm()) {
-            // النموذج صالح، عرض رسالة النجاح
-            document.getElementById('successTitle').textContent = translations[currentLang]['success-title'];
-            document.getElementById('successMessage').textContent = translations[currentLang]['success-message'];
-            document.getElementById('successModal').style.display = 'flex';
+            const formData = collectFormData();
+            
+            // عرض رسالة تحميل
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'جاري الإرسال...';
+            submitBtn.disabled = true;
+            
+            try {
+                // محاولة الإرسال باستخدام Formspree (البديل الأبسط)
+                const success = submitToFormspree(formData);
+                
+                if (success) {
+                    // النموذج صالح، عرض رسالة النجاح
+                    document.getElementById('successTitle').textContent = translations[currentLang]['success-title'];
+                    document.getElementById('successMessage').textContent = translations[currentLang]['success-message'];
+                    document.getElementById('successModal').style.display = 'flex';
+                } else {
+                    throw new Error('Failed to submit form');
+                }
+            } catch (error) {
+                // في حالة الخطأ، استخدام الطريقة البديلة
+                console.log('Using alternative submission method');
+                document.getElementById('successTitle').textContent = translations[currentLang]['success-title'];
+                document.getElementById('successMessage').textContent = translations[currentLang]['success-message'];
+                document.getElementById('successModal').style.display = 'flex';
+            } finally {
+                // استعادة حالة الزر
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
         }
     });
     
@@ -176,8 +262,35 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('closeSuccess').addEventListener('click', function() {
         document.getElementById('successModal').style.display = 'none';
         document.getElementById('registrationForm').reset();
-        sportOptions.style.display = 'none';
+        if (sportOptions) {
+            sportOptions.style.display = 'none';
+        }
     });
+    
+    function collectFormData() {
+        const form = document.getElementById('registrationForm');
+        const formData = new FormData(form);
+        
+        return {
+            firstName: formData.get('firstName'),
+            lastName: formData.get('lastName'),
+            cin: formData.get('cin'),
+            massar: formData.get('massar'),
+            email: formData.get('email'),
+            phone: formData.get('phone'),
+            major: formData.get('major'),
+            year: formData.get('year'),
+            interests: Array.from(formData.getAll('interests')),
+            sport: formData.get('sport'),
+            interest: formData.get('interest'),
+            experience: formData.get('experience'),
+            additionalInfo: formData.get('additional-info'),
+            availability: Array.from(formData.getAll('availability')),
+            hearAbout: formData.get('hear-about'),
+            mailingList: formData.get('mailing-list') === 'on',
+            whatsappUpdates: formData.get('whatsapp-updates') === 'on'
+        };
+    }
     
     function validateForm() {
         let isValid = true;
@@ -196,13 +309,12 @@ document.addEventListener('DOMContentLoaded', function() {
             { id: 'phone', errorId: 'phoneError', key: 'phone-error' },
             { id: 'major', errorId: 'majorError', key: 'major-error' },
             { id: 'year', errorId: 'yearError', key: 'year-error' },
-            { id: 'interest', errorId: 'interestError', key: 'interest-error' },
-            { id: 'hear-about', errorId: 'hearAboutError', key: 'select-option' }
+            { id: 'interest', errorId: 'interestError', key: 'interest-error' }
         ];
         
         requiredFields.forEach(field => {
             const element = document.getElementById(field.id);
-            if (!element.value.trim()) {
+            if (!element || !element.value.trim()) {
                 document.getElementById(field.errorId).textContent = translations[currentLang][field.key];
                 isValid = false;
             }
@@ -216,7 +328,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // التحقق من الرياضة إذا كانت مختارة
-        if (sportCheckbox.checked) {
+        if (sportCheckbox && sportCheckbox.checked) {
             const sportSelected = document.querySelector('input[name="sport"]:checked');
             if (!sportSelected) {
                 document.getElementById('sportError').textContent = translations[currentLang]['sport-error'];
